@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 13:10:20 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/17 15:01:00 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/17 15:48:15 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	sphere_inter2(t_rt *specs, t_ray *ray, t_var *v)
 {
+	(void) specs;
+	
 	if (v->t2 < v->t1 && v->t2 > NEAR)
 		v->t1 = v->t2;
 	if (v->t1 < ray->t && v->t1 > NEAR)
 	{
 		ray->t = v->t1;
 		ray->surf = v->s->surf;
-		ray->color = apply_texture(specs, ray->hitnormal);
 		intersection_vec3(ray);
 		ray->hitnormal = normalise(vec3_add(ray->hitpoint,
 		v->s->center, '-'));

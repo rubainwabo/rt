@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 13:57:28 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/17 14:47:58 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/17 18:08:06 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <pthread.h>
 # include "../includes/minilibx_macos/mlx.h"
 # include "../includes/libft/libft.h"
-# define THREAD_COUNT 64
+# define THREAD_COUNT 8
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
@@ -53,7 +53,6 @@ typedef struct		s_ray
 	t_vec3			origin;
 	t_vec3			direct;
 	t_vec3			colour;
-	t_vec3			color;
 	double			t;
 	t_vec3			hitpoint;
 	t_vec3			hitnormal;
@@ -83,6 +82,7 @@ typedef struct		s_image
 
 typedef struct		s_rt
 {
+	short			event;
 	void			*mlx;
 	void			*win;
 	void			*img;

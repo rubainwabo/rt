@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:14:15 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/09 19:53:46 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/17 17:46:20 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			init_rt_struct(int fd, t_rt *new, char **av)
 	new->far_col = BLACK;
 	new->cache = NULL;
 	new->cache_id = -1;
+	new->event = 0;
 	if (!(file_to_array(fd, new, av)))
 	{
 		mlx_destroy_window(new->mlx, new->win);

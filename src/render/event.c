@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 13:05:20 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/16 17:00:39 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/17 18:07:53 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,33 @@ void		init_texture(t_rt *specs)
 	specs->textures[5] = create_image(specs, "textures/negz.xpm");
 }
 
+/*
+** simple trick converting char to unsigned char to fix overflows
+*/
+
+void		apply_sepia(t_rt *specs)
+{
+	t_var	v;
+	int		i;
+
+	i = 0;
+	int comp = H_IMG * W_IMG * 4;
+	while (i < comp)
+	{
+		v.red = ft_min(255.0, (((unsigned char)specs->img_str[i + 2] * .393) + ((unsigned char)specs->img_str[i + 1] * .769) + ((unsigned char)specs->img_str[i] * .189)));
+		v.green = ft_min(255.0, (((unsigned char)specs->img_str[i + 2] * .349) + ((unsigned char)specs->img_str[i + 1] * .686) + ((unsigned char)specs->img_str[i] * .168)));
+		v.blue = ft_min(255.0, (((unsigned char)specs->img_str[i + 2] * .272) + ((unsigned char)specs->img_str[i + 1] * .534) + ((unsigned char)specs->img_str[i] * .131)));
+		specs->img_str[i + 2] = v.red;
+		specs->img_str[i + 1] = v.green;
+		specs->img_str[i] = v.blue;
+		i += 4;
+	}
+}
+
+/*
+** filter_str contents the default string without filters
+*/
+
 int			draw_image(t_rt *specs)
 {
 	if (!(specs->img = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
@@ -49,17 +76,19 @@ int			draw_image(t_rt *specs)
 	if (!(specs->img_str = mlx_get_data_addr(specs->img, &specs->bpp,
 	&specs->size_line, &specs->endian)))
 		return (0);
-	init_texture(specs);
+	//init_texture(specs);
 	launch_threads(specs, THREAD_COUNT);
+	if (specs->event == 1)
+		apply_sepia(specs);
 	mlx_put_image_to_window(specs->mlx, specs->win, specs->img, 0, 0);
 	return (1);
 }
 
 int			deal_key(int key, t_rt *specs)
 {
-	if (key == RIGHT)
+	if (key == 0)
 	{
-		specs->camera.x += 0.25;
+		specs->event = !specs->event;
 		draw_image(specs);
 	}
 	if (key == LEFT)
