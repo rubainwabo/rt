@@ -1,0 +1,53 @@
+camera
+	position(0, 0, 10)
+	direction(0, 0, -1)
+	field_of_view(90.0)
+
+lights
+	light(spherical)
+		origin(0, -2, 0)
+		color(1, 1, 1)
+		intensity(10)
+
+	light(spherical)
+		origin(0, 2, 0)
+		color(1, 1, 1)
+		intensity(1)
+	
+	light(distant)
+		direct(-1, 0, 1)
+		color(1, 1, 1)
+		intensity(1)
+
+objects
+    object(cylinder)
+		origin(-3, -4, 3)
+        axis(0, 1, 0)
+        max(7)
+		radius(1.5)
+		color(1, 1, 0)
+		type(0)
+
+    object(cylinder)
+		origin(3, -4, 3)
+        axis(0, 1, 0)
+        max(7)
+		radius(1.5)
+		color(1, 1, 0)
+		type(0)
+
+    object(cylinder)
+		origin(-3, -4, -3)
+        axis(0, 1, 0)
+        max(7)
+		radius(1.5)
+		color(1, 1, 0)
+		type(0)
+
+    object(cylinder)
+		origin(3, -4, -3)
+        axis(0, 1, 0)
+        max(7)
+		radius(1.5)
+		color(1, 1, 0)
+		type(0)

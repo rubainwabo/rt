@@ -1,0 +1,23 @@
+camera
+	position(0, 0, 10)
+	direction(0, 0, -0.5)
+    field_of_view(90.0)
+
+lights
+	light(distant)
+		direct(0, 0, 1)
+	    color(1, 1, 1)
+		intensity(0.5)
+
+objects
+    object(sphere)
+		origin(-4, -3, 0)
+		color(1, 0.25, 0.25)
+		radius(1.5)
+		type(0)
+
+    object(sphere)
+		origin(4, -3, 0)
+		color(1, 0.35, 0.65)
+		radius(1.5)
+		type(0)

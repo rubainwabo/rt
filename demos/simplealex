@@ -1,0 +1,74 @@
+camera
+	position(-3, 5, 10)
+	direction(0.3, -0.5, -1)
+  fov(90.0)
+
+lights
+	light(distant)
+		direct(0, 0, 1)
+	 	color(1, 1, 1)
+		intensity(0.5)
+
+	light(spherical)
+		origin(-1, 0, -3)
+		color(1, 1, 1)
+		intensity(50)
+
+	light(spherical)
+		origin(-1, 0, 5)
+		color(1, 1, 1)
+		intensity(50)
+
+	light(spherical)
+		origin(-1, 0, -12)
+		color(1, 1, 1)
+		intensity(50)
+
+objects
+	object(plane)
+    point(0, -5, 0)
+    normal(0, 1, 0)
+    color(0, 0, 1)
+		type(0)
+
+  object(plane)
+    point(-7, 0, 0)
+    normal(1, 0, 0)
+    color(0, 1, 0)
+		type(0)
+
+  object(plane)
+    point(7, 0, 0)
+    normal(1, 0, 0)
+    color(1, 0, 0)
+		type(0)
+	
+  object(plane)
+    point(0, 0, -7)
+    normal(0, 0, 1)
+    color(1, 1, 1)
+		type(2)
+
+  object(plane)
+    point(0, 0, 15)
+    normal(0, 0, 1)
+    color(1, 1, 1)
+		type(2)
+	
+  object(sphere)
+		origin(-4, -3, 0)
+		color(1, 0.25, 0.25)
+		radius(1.5)
+		type(0)
+
+  object(sphere)
+		origin(4, -3, 0)
+		color(1, 1, 0)
+		radius(1.5)
+		type(0)
+
+  object(sphere)
+		origin(0, 0, 0)
+		color(1, 1, 1)
+		radius(1.5)
+		type(2)
