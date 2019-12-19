@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:18:25 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/09 19:18:45 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/18 12:49:29 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void		shading_far(t_rt *specs, int x, int y)
 {
-	specs->img_str[(y * W_IMG + x) * 4] = specs->far_col & 0xff;
-	specs->img_str[(y * W_IMG + x) * 4 + 1] =
+	specs->img_str[(y * specs->w_img + x) * 4] = specs->far_col & 0xff;
+	specs->img_str[(y * specs->w_img + x) * 4 + 1] =
 			(specs->far_col >> 8) & 0xff;
-	specs->img_str[(y * W_IMG + x) * 4 + 2] =
+	specs->img_str[(y * specs->w_img + x) * 4 + 2] =
 			(specs->far_col >> 16) & 0xff;
 }
 
@@ -32,9 +32,9 @@ void		shading(t_ray *ray, t_rt *specs, int x, int y)
 	r = (1.0f - expf(ray->colour.x * exposure)) * 255.0;
 	g = (1.0f - expf(ray->colour.y * exposure)) * 255.0;
 	b = (1.0f - expf(ray->colour.z * exposure)) * 255.0;
-	specs->img_str[(y * W_IMG + x) * 4] = b;
-	specs->img_str[(y * W_IMG + x) * 4 + 1] = g;
-	specs->img_str[(y * W_IMG + x) * 4 + 2] = r;
+	specs->img_str[(y * specs->w_img + x) * 4] = b;
+	specs->img_str[(y * specs->w_img + x) * 4 + 1] = g;
+	specs->img_str[(y * specs->w_img + x) * 4 + 2] = r;
 }
 
 int			diffuse_prot(t_ray *ray, t_rt *specs, t_ray *original)
