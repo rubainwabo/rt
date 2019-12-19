@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:14:15 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/19 15:15:31 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/19 21:07:04 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int			init_rt_struct(int fd, t_rt *new, char **av)
 	new->fct_ptr[3] = cone_intersect;
 	if (!(new->win = mlx_new_window(new->mlx, WIDTH, HEIGHT, "rtv1")))
 		return (ft_error("mlx_window init failed"));
-	new->w_img = W_IMG * 2;
-	new->h_img = H_IMG * 2;
+	new->w_img = W_IMG / 2;
+	new->h_img = H_IMG / 2;
 	new->aspect = (double)W_IMG / H_IMG;
 	new->obj_list = NULL;
 	new->light_list = NULL;

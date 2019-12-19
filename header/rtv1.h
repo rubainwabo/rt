@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 13:57:28 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/18 17:53:42 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/19 22:37:12 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,15 @@
 # include <pthread.h>
 # include "../includes/minilibx_macos/mlx.h"
 # include "../includes/libft/libft.h"
-# define THREAD_COUNT 1000
+# include "key.h"
+# define THREAD_COUNT 64
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
-# define WIDTH 1800
+# define WIDTH 2000
 # define HEIGHT 1200
-# define W_IMG 1800
+# define W_IMG 2000
 # define H_IMG 1200
-# define RIGHT 123
-# define LEFT 124
-# define UP 125
-# define DOWN 126
 # define BLACK 0x0
 # define WHITE 0xffffff
 # define BLUE 0x0000ff
@@ -195,6 +192,8 @@ typedef struct		s_var
 	t_plane			*plane;
 	t_sphere		*sphere;
 	t_vec3			ext;
+	int				pix[4];
+	int				coord[5];
 }					t_var;
 
 /*
