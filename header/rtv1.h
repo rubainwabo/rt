@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
-# include "../includes/minilibx_macos/mlx.h"
+# include "../includes/minilibx/mlx.h"
 # include "../includes/libft/libft.h"
 # include "key.h"
 # define THREAD_COUNT 64
