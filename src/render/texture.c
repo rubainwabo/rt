@@ -17,7 +17,7 @@ t_vec3	apply_texture(t_rt *specs, t_vec3 direct)
 	t_vec3	output;
 	float	abs_coor[3];
 	int		sign_coor[3], index, color;
-	float	maxAxis, uc, vc, u, v;
+	float	maxAxis = 0, uc = 0, vc = 0, u, v;
 	int offset = 0;
 
 	abs_coor[0] = fabs(direct.x);

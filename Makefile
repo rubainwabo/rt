@@ -31,13 +31,13 @@ FLAGS = -Wall -Wextra -Werror -Ofast
 HEADER = ./header
 HEAD_PATH = header/rtv1.h
 
-MLX_PATH = includes/minilibx_macos/
+MLX_PATH = includes/minilibx/
 MLX = $(addprefix $(MLX_PATH), libmlx.a)
 
 LIBFT_PATH = includes/libft/
 LIBFT = $(addprefix $(LIBFT_PATH), libft.a)
 
-FRAMEWORKS = -framework OpenGl -framework Appkit
+FRAMEWORKS = -lXext -lX11
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 OBJ_PATH = obj/
@@ -52,7 +52,7 @@ $(LIBFT):
 	@make -C $(LIBFT_PATH)
 
 $(NAME): $(OBJ)
-	@gcc $(FLAGS) -o $@ $(OBJ) -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) -lft $(FRAMEWORKS)
+	@gcc $(FLAGS) -o $@ $(OBJ) -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) -lft $(FRAMEWORKS) -pthread -lm
 	@echo "\n\033[1;32m---------->[RT IS READY]<----------- \033[0m\n"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(HEAD_PATH)

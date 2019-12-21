@@ -52,9 +52,6 @@ void	exit_protocol(t_rt *specs, int p, char *err)
 
 void	exit_protocol2(t_rt *specs, int p, char *err)
 {
-	int		i;
-
-	i = -1;
 	if (p == 19)
 		ft_putendl(err);
 	else
