@@ -57,7 +57,7 @@ objects
 	
   object(sphere)
 		origin(-4, -3, 0)
-		color(1, 0.25, 0.25)
+		color(1, 0, 0)
 		radius(1.5)
 		type(0)
 

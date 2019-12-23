@@ -23,10 +23,10 @@
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
-# define WIDTH 800
-# define HEIGHT 500
-# define W_IMG 800
-# define H_IMG 500
+# define WIDTH 1000
+# define HEIGHT 800
+# define W_IMG 1000
+# define H_IMG 800
 # define BLACK 0x0
 # define WHITE 0xffffff
 # define BLUE 0x0000ff
@@ -110,6 +110,7 @@ typedef struct		s_rt
 	char			*str;
 	void			*cache;
 	int				cache_id;
+	int				first;
 }					t_rt;
 
 typedef struct		s_thread
@@ -193,7 +194,7 @@ typedef struct		s_var
 	t_sphere		*sphere;
 	t_vec3			ext;
 	int				pix[4];
-	int				coord[5];
+	int				coord[17];
 }					t_var;
 
 /*
@@ -256,5 +257,6 @@ int					diffuse_prot(t_ray *ray, t_rt *specs, t_ray *original);
 void				shading(t_ray *ray, t_rt *specs, int x, int y);
 void				shading_far(t_rt *specs, int x, int y);
 t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
+int					move_cam(int button, int x, int y, t_rt *specs);
 
 #endif

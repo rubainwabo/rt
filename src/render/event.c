@@ -94,7 +94,7 @@ void		apply_blue(t_rt *specs)
 	int	i;
 	int	gray;
 
-	if (specs->event == 3)  // this caps the maximum call of apply_grayscale by the corresponding event
+	if (specs->event == 6)  // this caps the maximum call of apply_grayscale by the corresponding event
 		return ;
 	i = 0;
 	while (i < comp)
@@ -105,7 +105,7 @@ void		apply_blue(t_rt *specs)
 		specs->img_str2[i] = gray;
 		i += 4;
 	}
-	specs->event = 3;
+	specs->event = 6;
 }
 
 void		apply_purple(t_rt *specs)
@@ -222,6 +222,78 @@ void		sub_sampling(t_rt *specs)
 	}
 }
 
+
+void		fill(t_rt *specs, int coord, int pix)
+{
+	specs->img_str2[coord] = pix & 0xff;
+	specs->img_str2[coord + 1] = (pix >> 8) & 0xff;
+	specs->img_str2[coord + 2] = (pix >> 16) & 0xff;
+}
+
+void		sub2_sampling(t_rt *specs)
+{
+	int		i;
+	int		j;
+	t_var	v;
+
+	i = 0;
+	while (i < specs->h_img)
+	{
+		j = 0;
+		while (j < specs->w_img)
+		{
+			v.coord[16] = (j * 4) + i * specs->size_line;
+			ft_memcpy(&v.pix[0], specs->img_str + v.coord[16], 4);
+			v.coord[0] = (j * 16) + i * 4 * specs->size_line2 ;
+			v.coord[1] = v.coord[0] + 4;
+			v.coord[2] = v.coord[0] + 8;
+			v.coord[3] = v.coord[0] + 12;
+			v.coord[4] = (j * 16) + ((i * 4) + 1) * specs->size_line2;
+			v.coord[5] = v.coord[4] + 4;
+			v.coord[6] = v.coord[4] + 8;
+			v.coord[7] = v.coord[4] + 12;
+			v.coord[8] = (j * 16) + ((i * 4) + 2) * specs->size_line2;
+			v.coord[9] = v.coord[8] + 4;
+			v.coord[10] = v.coord[8] + 8;
+			v.coord[11] = v.coord[8] + 12;
+			v.coord[12] = (j * 16) + ((i * 4) + 3) * specs->size_line2;
+			v.coord[13] = v.coord[12] + 4;
+			v.coord[14] = v.coord[12] + 8;
+			v.coord[15] = v.coord[12] + 12;
+			// pixel1
+			specs->img_str2[v.coord[0]] = v.pix[0] & 0xff;
+			specs->img_str2[v.coord[0] + 1] = (v.pix[0] >> 8) & 0xff;
+			specs->img_str2[v.coord[0] + 2] = (v.pix[0] >> 16) & 0xff;
+			// pixel2
+			specs->img_str2[v.coord[1]] = v.pix[0] & 0xff;
+			specs->img_str2[v.coord[1] + 1] = (v.pix[0] >> 8) & 0xff;
+			specs->img_str2[v.coord[1] + 2] = (v.pix[0] >> 16) & 0xff;
+			// pixel3
+			specs->img_str2[v.coord[2]] = v.pix[0] & 0xff;
+			specs->img_str2[v.coord[2] + 1] = (v.pix[0] >> 8) & 0xff;
+			specs->img_str2[v.coord[2] + 2] = (v.pix[0] >> 16) & 0xff;
+			// pixel4
+			specs->img_str2[v.coord[3]] = v.pix[0] & 0xff;
+			specs->img_str2[v.coord[3] + 1] = (v.pix[0] >> 8) & 0xff;
+			specs->img_str2[v.coord[3] + 2] = (v.pix[0] >> 16) & 0xff;
+			fill(specs, v.coord[4], v.pix[0]);
+			fill(specs, v.coord[5], v.pix[0]);
+			fill(specs, v.coord[6], v.pix[0]);
+			fill(specs, v.coord[7], v.pix[0]);
+			fill(specs, v.coord[8], v.pix[0]);
+			fill(specs, v.coord[9], v.pix[0]);
+			fill(specs, v.coord[10], v.pix[0]);
+			fill(specs, v.coord[11], v.pix[0]);
+			fill(specs, v.coord[12], v.pix[0]);
+			fill(specs, v.coord[13], v.pix[0]);
+			fill(specs, v.coord[14], v.pix[0]);
+			fill(specs, v.coord[15], v.pix[0]);
+			j++;
+		}
+		i++;
+	}
+}
+
 /*
 ** img2 and img_str2 are the identifiers of the image that is always going to be printed
 ** img and img_str are either the sub or super sampling
@@ -272,82 +344,129 @@ int		sub_image(t_rt *specs)
 	return (1);
 }
 
-int			draw_image(t_rt *specs)
+int		sub2_image(t_rt *specs)
 {
-	if (specs->event == 3)  // this caps the maximum call of draw_image by the corresponding event
-		return (1);
-	sub_image(specs);
+	specs->w_img = W_IMG / 4;
+	specs->h_img = H_IMG / 4;
+	if (!(specs->img = mlx_new_image(specs->mlx, specs->w_img, specs->h_img)))
+		return (0);
+	if (!(specs->img_str = mlx_get_data_addr(specs->img, &specs->bpp,
+	&specs->size_line, &specs->endian)))
+		return (0);
+	if (!(specs->img2 = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
+		return (0);
+	if (!(specs->img_str2 = mlx_get_data_addr(specs->img2, &specs->bpp,
+	&specs->size_line2, &specs->endian)))
+		return (0);
+	launch_threads(specs, THREAD_COUNT);
+	sub2_sampling(specs);
+	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
+	return (1);
+}
+
+int			native_image(t_rt *specs)
+{
 	specs->w_img = W_IMG;
 	specs->h_img = H_IMG;
-	mlx_do_sync(specs->mlx);
 	if (!(specs->img = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
 		return (0);
 	if (!(specs->img_str = mlx_get_data_addr(specs->img, &specs->bpp,
 	&specs->size_line, &specs->endian)))
 		return (0);
-	// if (!(specs->img2 = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
-	// 	return (0);
-	// if (!(specs->img_str2 = mlx_get_data_addr(specs->img, &specs->bpp,
-	// &specs->size_line2, &specs->endian)))
-	//	return (0);
 	launch_threads(specs, THREAD_COUNT);
 	mlx_put_image_to_window(specs->mlx, specs->win, specs->img, 0, 0);
-	mlx_do_sync(specs->mlx);
-	super_image(specs);
-	specs->event = 3;
+	return (1);
+}
+
+int			draw_image(t_rt *specs)
+{
+	sub_image(specs);
+	if (specs->event == 1)
+	{
+		native_image(specs);
+		super_image(specs);
+	}
 	return (1);
 }
 
 int			deal_key(int key, t_rt *specs)
 {
-	if (key == S)
+	if (key == K_A)
 	{
 		apply_grayscale(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
 	}
-	if (key == A)
+	if (key == K_S)
 	{
 		apply_sepia(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
 	}
-	if (key == F)
+	if (key == K_F)
 	{
 		apply_blue(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
 	}
-	if (key == G)
+	if (key == K_G)
 	{
 		apply_green(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
 	}
-	if (key == H)
+	if (key == K_H)
 	{
 		apply_purple(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
 	}
-	if (key == D)
+	if (key == K_D)
+	{
 		draw_image(specs);
-	if (key == RIGHT)
+		specs->event = 3;
+	}
+	if (key == K_AR_R)
 	{
 		specs->camera.x -= 0.25;
 		draw_image(specs);
 	}
-	if (key == LEFT)
+	if (key == K_AR_L)
 	{
 		specs->camera.x += 0.25;
 		draw_image(specs);
 	}
-	if (key == UP)
+	if (key == K_AR_U)
 	{
 		specs->camera.y -= 0.25;
 		draw_image(specs);
 	}
-	if (key == DOWN)
+	if (key == K_AR_D)
 	{
 		specs->camera.y += 0.25;
 		draw_image(specs);
 	}
-	if (key == 53)
+	if (key == K_SP)
+	{
+		specs->event = !specs->event;
+		draw_image(specs);
+	}
+	if (key == K_ESC)
 		exit_protocol2(specs, 19, "exit with code 0");
+	return (0);
+}
+
+int 	move_cam(int button, int x, int y, t_rt *specs)
+{
+	float		xm;
+	float		ym;
+
+	if (button == M_CLK_L)
+	{
+		specs->first = 0;
+		xm = ((2.0 * (double)x / W_IMG) - 1.0) * specs->alpha * specs->aspect;
+		ym = (1.0 - (2.0 * (double)y / H_IMG)) * specs->alpha;
+		specs->view_dir.x = xm;
+		specs->view_dir.y = ym;
+		specs->view_dir.z = -1.0;
+		specs->view_dir = normalise(specs->view_dir);
+		//printf("New direction : x = %f y = %f z = %f\n", specs->view_dir.x, specs->view_dir.y, specs->view_dir.z);
+		draw_image(specs);
+	}
 	return (0);
 }

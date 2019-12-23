@@ -5,24 +5,24 @@ camera
 
 light
     light(spherical)
-    	origin(-2, 0, -10)
+    	origin(-2, 0, 1)
     	color(1, 1, 1)
     	intensity(10)
     
     light(spherical)
-    	origin(-2, 0, 5)
+    	origin(2, 0, 1)
     	color(1, 1, 1)
-    	intensity(3)
+    	intensity(10)
 
     light(distant)
-	    direct(-1, -0.5, 1)
+	    direct(0, 0, 1)
 	    color(1, 1, 1)
-	    intensity(1)
+	    intensity(2)
 
 objects
 	object(plane)
-    point(2, 0, 1)
-    normal(1, 0, 0)
+    point(0, -2, 1)
+    normal(0, -1, 0)
     color(1, 1, 0.45)
     type(0)
 
@@ -33,19 +33,19 @@ objects
 		type(2)
 
   object(sphere)
-		origin(0, 5, 0)
+		origin(5, 0, 0)
 		color(1, 1, 0)
 		radius(1.5)
 		type(0)
 
   object(sphere)
-		origin(0, -5, 0)
+		origin(-5, 0, 0)
 		color(1, 0.11, 0.45)
 		radius(1.5)
     type(0)
 
     object(cone)
-      center(-5, 0, 0)
+      center(5, 5, 0)
       axis(0, 1, 0)
       max(1)
       min(-1)
@@ -63,10 +63,26 @@ objects
       type(0)
 
 	object(cone)
-      center(-5, -5, 0)        
+      center(0, 5, 0)        
       axis(0, 1, 0)
       max(1)
       min(-1)
       angle(90)
       color(1, 0, 0)
       type(0)
+
+	object(cylinder)
+		origin(-5, 2, 0)
+		axis(0, 1, 0)
+		max(2)
+		radius(0.5)
+		color(1, 0, 0)
+		type(0)
+
+	object(cylinder)
+		origin(5, 2, 0)
+		axis(0, 1, 0)
+		max(2)
+		radius(0.5)
+		color(1, 0, 0)
+		type(0)

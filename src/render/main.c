@@ -92,9 +92,12 @@ int			main(int ac, char **av)
 	if (!init_rt_struct(fd, &specs, av))
 		return (ft_error("Failed to read input file"));
 	parse(&specs);
+	specs.alpha = tan(specs.alpha / 2);
 	if (!draw_image(&specs))
 		exit_protocol2(&specs, 1, "Can't create the image");
 	mlx_key_hook(specs.win, deal_key, &specs);
+	mlx_mouse_hook(specs.win, move_cam, &specs);
+	//mlx_hook(specs.win, 6, 1L << 6, move_cam, &specs);
 	mlx_loop(specs.mlx);
 	return (0);
 }
