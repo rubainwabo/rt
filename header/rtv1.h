@@ -23,10 +23,12 @@
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
-# define WIDTH 1000
+# define WIDTH 1200
 # define HEIGHT 800
-# define W_IMG 1000
+# define W_IMG 900
 # define H_IMG 800
+# define POS_X 300
+# define POS_Y 0
 # define BLACK 0x0
 # define WHITE 0xffffff
 # define BLUE 0x0000ff
@@ -258,5 +260,8 @@ void				shading(t_ray *ray, t_rt *specs, int x, int y);
 void				shading_far(t_rt *specs, int x, int y);
 t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
 int					move_cam(int button, int x, int y, t_rt *specs);
+void				draw_backgrd(t_rt *specs);
+void				possible_events(t_rt *specs);
+void				possible_events2(t_rt *specs);
 
 #endif

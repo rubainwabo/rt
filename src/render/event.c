@@ -51,8 +51,6 @@ void		apply_sepia(t_rt *specs)
 	t_var	v;
 	int		i;
 
-	if (specs->event == 1)  // this caps the maximum call of apply_sepia by the corresponding event
-		return ;
 	i = 0;
 	int comp = H_IMG * W_IMG * 4;
 	while (i < comp)
@@ -65,7 +63,6 @@ void		apply_sepia(t_rt *specs)
 		specs->img_str2[i] = v.blue;
 		i += 4;
 	}
-	specs->event = 1;
 }
 
 void		apply_grayscale(t_rt *specs)
@@ -74,8 +71,6 @@ void		apply_grayscale(t_rt *specs)
 	int	i;
 	int	gray;
 
-	if (specs->event == 2)  // this caps the maximum call of apply_grayscale by the corresponding event
-		return ;
 	i = 0;
 	while (i < comp)
 	{
@@ -85,7 +80,6 @@ void		apply_grayscale(t_rt *specs)
 		specs->img_str2[i] = gray;
 		i += 4;
 	}
-	specs->event = 2;
 }
 
 void		apply_blue(t_rt *specs)
@@ -94,8 +88,6 @@ void		apply_blue(t_rt *specs)
 	int	i;
 	int	gray;
 
-	if (specs->event == 6)  // this caps the maximum call of apply_grayscale by the corresponding event
-		return ;
 	i = 0;
 	while (i < comp)
 	{
@@ -105,7 +97,6 @@ void		apply_blue(t_rt *specs)
 		specs->img_str2[i] = gray;
 		i += 4;
 	}
-	specs->event = 6;
 }
 
 void		apply_purple(t_rt *specs)
@@ -114,8 +105,6 @@ void		apply_purple(t_rt *specs)
 	int	i;
 	int	gray;
 
-	if (specs->event == 4)  // this caps the maximum call of apply_grayscale by the corresponding event
-		return ;
 	i = 0;
 	while (i < comp)
 	{
@@ -125,7 +114,6 @@ void		apply_purple(t_rt *specs)
 		specs->img_str2[i] = 0;
 		i += 4;
 	}
-	specs->event = 4;
 }
 
 void		apply_green(t_rt *specs)
@@ -134,8 +122,6 @@ void		apply_green(t_rt *specs)
 	int	i;
 	int	gray;
 
-	if (specs->event == 5)  // this caps the maximum call of apply_grayscale by the corresponding event
-		return ;
 	i = 0;
 	while (i < comp)
 	{
@@ -145,7 +131,6 @@ void		apply_green(t_rt *specs)
 		specs->img_str2[i] = 0;
 		i += 4;
 	}
-	specs->event = 5;
 }
 
 /*
@@ -320,7 +305,7 @@ int		super_image(t_rt *specs)
 		return (0);
 	launch_threads(specs, THREAD_COUNT);
 	super_sampling(specs);
-	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
+	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
 	return (1);
 }
 
@@ -340,7 +325,7 @@ int		sub_image(t_rt *specs)
 		return (0);
 	launch_threads(specs, THREAD_COUNT);
 	sub_sampling(specs);
-	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
+	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
 	return (1);
 }
 
@@ -360,7 +345,7 @@ int		sub2_image(t_rt *specs)
 		return (0);
 	launch_threads(specs, THREAD_COUNT);
 	sub2_sampling(specs);
-	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
+	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
 	return (1);
 }
 
@@ -374,80 +359,101 @@ int			native_image(t_rt *specs)
 	&specs->size_line, &specs->endian)))
 		return (0);
 	launch_threads(specs, THREAD_COUNT);
-	mlx_put_image_to_window(specs->mlx, specs->win, specs->img, 0, 0);
+	mlx_put_image_to_window(specs->mlx, specs->win, specs->img, POS_X, POS_Y);
 	return (1);
 }
 
 int			draw_image(t_rt *specs)
 {
-	sub_image(specs);
-	if (specs->event == 1)
+	draw_backgrd(specs);
+	if (specs->event == NO_EVENT)
+		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING..");
+	else
+		possible_events(specs);
+	sub2_image(specs);
+	if (specs->event == NO_EVENT)
 	{
+		sub_image(specs);
+		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
 		native_image(specs);
-		super_image(specs);
+		possible_events2(specs);
 	}
 	return (1);
 }
 
-int			deal_key(int key, t_rt *specs)
+void	deal_key_mov(int key, t_rt *specs)
 {
-	if (key == K_A)
-	{
-		apply_grayscale(specs);
-		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
-	}
-	if (key == K_S)
-	{
-		apply_sepia(specs);
-		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
-	}
-	if (key == K_F)
-	{
-		apply_blue(specs);
-		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
-	}
-	if (key == K_G)
-	{
-		apply_green(specs);
-		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
-	}
-	if (key == K_H)
-	{
-		apply_purple(specs);
-		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, 0, 0);
-	}
-	if (key == K_D)
-	{
-		draw_image(specs);
-		specs->event = 3;
-	}
 	if (key == K_AR_R)
 	{
-		specs->camera.x -= 0.25;
+		specs->camera.x -= 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_L)
 	{
-		specs->camera.x += 0.25;
+		specs->camera.x += 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_U)
 	{
-		specs->camera.y -= 0.25;
+		specs->camera.y -= 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_D)
 	{
-		specs->camera.y += 0.25;
+		specs->camera.y += 1.25;
 		draw_image(specs);
 	}
+}
+
+void	deal_key_filter(int key, t_rt *specs)
+{
+	if (key == K_A)
+	{
+		apply_grayscale(specs);
+		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+	}
+	if (key == K_S)
+	{
+		apply_sepia(specs);
+		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+	}
+	if (key == K_F)
+	{
+		apply_blue(specs);
+		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+	}
+	if (key == K_G)
+	{
+		apply_green(specs);
+		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+	}
+	if (key == K_H)
+	{
+		apply_purple(specs);
+		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+	}
+}
+
+int			deal_key(int key, t_rt *specs)
+{
+	if (specs->event == EVENT)
+		deal_key_mov(key, specs);
 	if (key == K_SP)
 	{
 		specs->event = !specs->event;
 		draw_image(specs);
 	}
+	if (key == K_L)
+	{
+		draw_backgrd(specs);
+		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
+		super_image(specs);
+		possible_events2(specs);
+		specs->event = NO_EVENT;
+	}
 	if (key == K_ESC)
 		exit_protocol2(specs, 19, "exit with code 0");
+	deal_key_filter(key, specs);	
 	return (0);
 }
 
@@ -456,16 +462,18 @@ int 	move_cam(int button, int x, int y, t_rt *specs)
 	float		xm;
 	float		ym;
 
-	if (button == M_CLK_L)
+	if (button == M_CLK_L && specs->event == EVENT)
 	{
 		specs->first = 0;
-		xm = ((2.0 * (double)x / W_IMG) - 1.0) * specs->alpha * specs->aspect;
+		if (x - POS_X < 0)
+			return (0);
+		xm = ((2.0 * (double)(x - POS_X) / W_IMG) - 1.0) * specs->alpha * specs->aspect;
 		ym = (1.0 - (2.0 * (double)y / H_IMG)) * specs->alpha;
 		specs->view_dir.x = xm;
 		specs->view_dir.y = ym;
 		specs->view_dir.z = -1.0;
 		specs->view_dir = normalise(specs->view_dir);
-		//printf("New direction : x = %f y = %f z = %f\n", specs->view_dir.x, specs->view_dir.y, specs->view_dir.z);
+		specs->view_dir = vector_matrix_multiply(specs->view_dir, specs->view_rot);
 		draw_image(specs);
 	}
 	return (0);
