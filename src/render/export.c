@@ -1,6 +1,6 @@
 #include "rtv1.h"
 
-char		*extract_name(char *file_name)
+static char		*extract_name(char *file_name)
 {
 	char	*name;
 	char	*tmp;
@@ -24,13 +24,32 @@ char		*extract_name(char *file_name)
 	return (name);
 }
 
+static void		set_title(FILE *fp)
+{
+	char	*str;
+	char	*tmp;
+
+	tmp = ft_itoa(W_IMG);
+	str = ft_strjoin(tmp, " ");
+	fwrite("P6\n", 1, 3, fp);
+	fwrite(str, 1, ft_strlen_err(str), fp);
+	free(str);
+	free(tmp);
+	tmp = ft_itoa(H_IMG);
+	str = ft_strjoin(tmp, "\n");
+	fwrite(str, 1, ft_strlen_err(str), fp);
+	fwrite("255\n", 1, 4, fp);
+	free(str);
+	free(tmp);
+}
+
 void		fill_file(t_rt *specs, FILE *fp)
 {
 	unsigned char color[3];
 	int		i;
 
 	i = 0;
-	fprintf(fp, "P6\n%d %d\n255\n", W_IMG, H_IMG);
+	set_title(fp);
 	while (i < W_IMG * H_IMG * 4)
 	{
 		color[0] = specs->img_str2[i + 2];

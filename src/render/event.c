@@ -469,7 +469,7 @@ int 	move_cam(int button, int x, int y, t_rt *specs)
 		specs->first = 0;
 		if (x - POS_X < 0)
 			return (0);
-		xm = ((2.0 * (double)(x - POS_X) / W_IMG) - 1.0) * specs->alpha * specs->aspect;
+		xm = ((2.0 * (double)x / W_IMG) - 1.0) * specs->alpha * specs->aspect;
 		ym = (1.0 - (2.0 * (double)y / H_IMG)) * specs->alpha;
 		specs->view_dir.x = xm;
 		specs->view_dir.y = ym;
