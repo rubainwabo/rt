@@ -81,6 +81,7 @@ typedef struct		s_image
 
 typedef struct		s_rt
 {
+	char			*file_name;
 	int				w_img;
 	int				h_img;
 	short			event;
@@ -263,5 +264,6 @@ int					move_cam(int button, int x, int y, t_rt *specs);
 void				draw_backgrd(t_rt *specs);
 void				possible_events(t_rt *specs);
 void				possible_events2(t_rt *specs);
+void				save_file(t_rt *specs);
 
 #endif

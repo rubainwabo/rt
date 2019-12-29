@@ -33,7 +33,7 @@ void	possible_events2(t_rt *specs)
 	mlx_string_put(specs->mlx, specs->win, 20, 150, WHITE, "ANTI ALIASING :");
 	mlx_string_put(specs->mlx, specs->win, 200, 150, GREEN, "L");
 	mlx_string_put(specs->mlx, specs->win, 20, 200, WHITE, "FILTER SEPIA : ");
-	mlx_string_put(specs->mlx, specs->win, 200, 200, GREEN, "S");
+	mlx_string_put(specs->mlx, specs->win, 200, 200, GREEN, "D");
 	mlx_string_put(specs->mlx, specs->win, 20, 250, WHITE, "FILTER GRAY : ");
 	mlx_string_put(specs->mlx, specs->win, 200, 250, GREEN, "A");
 	mlx_string_put(specs->mlx, specs->win, 20, 300, WHITE, "FILTER BLUE : ");
@@ -42,6 +42,8 @@ void	possible_events2(t_rt *specs)
 	mlx_string_put(specs->mlx, specs->win, 200, 350, GREEN, "G");
 	mlx_string_put(specs->mlx, specs->win, 20, 400, WHITE, "FILTER PURPLE : ");
 	mlx_string_put(specs->mlx, specs->win, 200, 400, GREEN, "H");
+	mlx_string_put(specs->mlx, specs->win, 20, 450, WHITE, "SAVE IMAGE : ");
+	mlx_string_put(specs->mlx, specs->win, 200, 450, GREEN, "S");
 }
 
 void	possible_events(t_rt *specs)
@@ -56,4 +58,6 @@ void	possible_events(t_rt *specs)
 	mlx_string_put(specs->mlx, specs->win, 200, 200, GREEN, "ARROW KEYS");
 	mlx_string_put(specs->mlx, specs->win, 20, 250, WHITE, "MOVE CAMERA DIRECTION : ");
 	mlx_string_put(specs->mlx, specs->win, 200, 250, GREEN, "LEFT MOUSE CLICK");
+	mlx_string_put(specs->mlx, specs->win, 20, 300, WHITE, "SAVE IMAGE : ");
+	mlx_string_put(specs->mlx, specs->win, 200, 300, GREEN, "S");
 }

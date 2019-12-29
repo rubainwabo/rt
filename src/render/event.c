@@ -412,7 +412,7 @@ void	deal_key_filter(int key, t_rt *specs)
 		apply_grayscale(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
 	}
-	if (key == K_S)
+	if (key == K_D)
 	{
 		apply_sepia(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
@@ -443,6 +443,8 @@ int			deal_key(int key, t_rt *specs)
 		specs->event = !specs->event;
 		draw_image(specs);
 	}
+	if (key == K_S)
+		save_file(specs);
 	if (key == K_L)
 	{
 		draw_backgrd(specs);
