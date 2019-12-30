@@ -284,11 +284,6 @@ void		sub2_sampling(t_rt *specs)
 ** img and img_str are either the sub or super sampling
 */
 
-// void		put_to_window(t_rt *specs)
-// {
-	
-// }
-
 int		super_image(t_rt *specs)
 {
 	specs->w_img = W_IMG * 2;
@@ -385,22 +380,22 @@ void	deal_key_mov(int key, t_rt *specs)
 {
 	if (key == K_AR_R)
 	{
-		specs->camera.x -= 1.25;
+		specs->camera.x += 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_L)
 	{
-		specs->camera.x += 1.25;
+		specs->camera.x -= 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_U)
 	{
-		specs->camera.y -= 1.25;
+		specs->camera.y += 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_D)
 	{
-		specs->camera.y += 1.25;
+		specs->camera.y -= 1.25;
 		draw_image(specs);
 	}
 }

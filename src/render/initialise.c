@@ -76,7 +76,7 @@ int			init_rt_struct(int fd, t_rt *new, char **av)
 	new->fct_ptr[1] = sphere_intersect;
 	new->fct_ptr[2] = cylinder_intersect;
 	new->fct_ptr[3] = cone_intersect;
-	if (!(new->win = mlx_new_window(new->mlx, WIDTH, HEIGHT, "rtv1")))
+	if (!(new->win = mlx_new_window(new->mlx, WIDTH, HEIGHT, "rt")))
 		return (ft_error("mlx_window init failed"));
 	new->w_img = W_IMG / 2;
 	new->h_img = H_IMG / 2;

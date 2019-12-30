@@ -1,5 +1,29 @@
 #include "rtv1.h"
 
+static char		*putnum(char *name)
+{
+	static unsigned int	num;
+	char				*tmp;
+	char				*tmp1;
+
+	if (num > 0)
+	{
+		tmp = name;
+		name = ft_strjoin(name, "(");
+		free(tmp);
+		tmp = name;
+		tmp1 = ft_itoa(num);
+		name = ft_strjoin(name, tmp1);
+		free(tmp);
+		free(tmp1);
+		tmp = name;
+		name = ft_strjoin(name, ")");
+		free(tmp);
+	}
+	num++;
+	return (name);
+}
+
 static char		*extract_name(char *file_name)
 {
 	char	*name;
@@ -9,6 +33,7 @@ static char		*extract_name(char *file_name)
 		file_name++;
 	if (!(name = ft_strdup(file_name)))
 		return (NULL);
+	name = putnum(name);
 	if (!(tmp = ft_strjoin("save_images", name)))
 	{
 		free(name);

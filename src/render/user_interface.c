@@ -1,8 +1,8 @@
 #include "rtv1.h"
 
-void	init_ui_img(t_image *img, t_rt *specs)
+static void		init_ui_img(t_image *img, t_rt *specs, int x, int y)
 {
-	img->ptr = mlx_new_image(specs->mlx, POS_X, HEIGHT);
+	img->ptr = mlx_new_image(specs->mlx, x, y);
 	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->sizeline, &img->endian);
 }
 
@@ -10,12 +10,14 @@ void    draw_backgrd(t_rt *specs)
 {
 	int		i;
 	t_image	img;
+	int		size;
 
-	init_ui_img(&img, specs);
+	size = HEIGHT * POS_X * 4;
+	init_ui_img(&img, specs, POS_X, HEIGHT);
 	i = 0;
-	while (i < HEIGHT * POS_X * 4)
+	while (i < size)
 	{
-		img.data[i] = 0x000011 & 0xff;
+		img.data[i] = ((int)(0x000088 * (double)i / size)) & 0xff;;
 		img.data[i + 1] = 0;
 		img.data[i + 2] = 0;
 		i += 4;

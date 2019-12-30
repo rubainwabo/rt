@@ -83,7 +83,7 @@ int			main(int ac, char **av)
 	int			fd;
 
 	if (ac != 2)
-		return (ft_error("Usage: ./rtv1 scenefile"));
+		return (ft_error("Usage: ./rt scenefile"));
 	if ((fd = open(av[1], O_RDONLY)) < 0)
 	{
 		perror("");
