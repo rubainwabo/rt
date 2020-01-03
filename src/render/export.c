@@ -98,5 +98,5 @@ void		save_file(t_rt *specs)
 	}
 	free(name);
 	fill_file(specs, fp);
-	ft_putstr_fd("Image saved in the folder save_images\n", 2);
+	mlx_string_put(specs->mlx, specs->win, 10, 10, RED, "saved!");
 }

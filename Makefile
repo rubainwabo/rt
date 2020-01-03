@@ -14,7 +14,7 @@
 
 NAME = rt
 
-SAVE = save_images/
+SAVE = images_saved/
 
 PARSER = parse.c object_utils.c parse_objects.c manage_object.c exit_protocol.c
 

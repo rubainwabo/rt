@@ -1,7 +1,7 @@
 camera
 	position(0, 0, 10)
-	direction(0, 0, -1)
-    	fov(90.0)
+	direction(0, 0, 1)
+    fov(90.0)
 
 lights
     light(distant)

@@ -362,14 +362,13 @@ int			draw_image(t_rt *specs)
 {
 	draw_backgrd(specs);
 	if (specs->event == NO_EVENT)
-		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING..");
+		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
 	else
 		possible_events(specs);
 	sub2_image(specs);
 	if (specs->event == NO_EVENT)
 	{
 		sub_image(specs);
-		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
 		native_image(specs);
 		possible_events2(specs);
 	}
@@ -380,22 +379,22 @@ void	deal_key_mov(int key, t_rt *specs)
 {
 	if (key == K_AR_R)
 	{
-		specs->camera.x += 1.25;
+		specs->camera.x -= 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_L)
 	{
-		specs->camera.x -= 1.25;
+		specs->camera.x += 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_U)
 	{
-		specs->camera.y += 1.25;
+		specs->camera.y -= 1.25;
 		draw_image(specs);
 	}
 	if (key == K_AR_D)
 	{
-		specs->camera.y -= 1.25;
+		specs->camera.y += 1.25;
 		draw_image(specs);
 	}
 }
@@ -464,13 +463,23 @@ int 	move_cam(int button, int x, int y, t_rt *specs)
 		specs->first = 0;
 		if (x - POS_X < 0)
 			return (0);
-		xm = ((2.0 * (double)x / W_IMG) - 1.0) * specs->alpha * specs->aspect;
+		xm = ((2.0 * (double)(x - POS_X) / W_IMG) - 1.0) * specs->alpha * specs->aspect;
 		ym = (1.0 - (2.0 * (double)y / H_IMG)) * specs->alpha;
 		specs->view_dir.x = xm;
 		specs->view_dir.y = ym;
 		specs->view_dir.z = -1.0;
 		specs->view_dir = normalise(specs->view_dir);
 		specs->view_dir = vector_matrix_multiply(specs->view_dir, specs->view_rot);
+		draw_image(specs);
+	}
+	if (button == M_SCR_U && specs->event == EVENT)
+	{
+		specs->camera.z -= 1;
+		draw_image(specs);
+	}
+	if (button == M_SCR_D && specs->event == EVENT)
+	{
+		specs->camera.z += 1;
 		draw_image(specs);
 	}
 	return (0);
