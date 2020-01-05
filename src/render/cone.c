@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	cone_intersect_point(t_ray *ray, t_cone *specs, double height)
 {

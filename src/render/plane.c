@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	bump_map(t_ray *ray, t_plane *spec, double bumpwidth, t_vec3 parallel)
 {

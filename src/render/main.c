@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 {

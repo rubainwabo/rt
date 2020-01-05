@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		rot_from_base2(double a, t_vec3 *u, t_mat3 *o)
 {

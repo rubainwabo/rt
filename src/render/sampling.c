@@ -1,5 +1,5 @@
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		super_sampling(t_rt *specs)
 {

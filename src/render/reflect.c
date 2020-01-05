@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/rtv1.h"
+#include "rt.h"
 
 t_vec3		reflect(t_vec3 norm, t_vec3 inci)
 {

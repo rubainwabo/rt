@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 void    draw_backgrd(t_rt *specs)
 {

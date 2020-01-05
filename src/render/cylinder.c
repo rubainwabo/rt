@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/rtv1.h"
+#include "rt.h"
 
 int		solve_polynom_2(double *abc, double *t1, double *t2)
 {

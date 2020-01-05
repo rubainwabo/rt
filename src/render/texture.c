@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 t_vec3	apply_texture(t_rt *specs, t_vec3 direct)
 {

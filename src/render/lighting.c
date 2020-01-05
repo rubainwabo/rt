@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	diffuse_light(double dot, t_vec3 lcolor, t_vec3 dcolor, t_ray *ray)
 {

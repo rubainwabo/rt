@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 static char		*putnum(char *name)
 {

@@ -32,7 +32,7 @@ SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 FLAGS = -Wall -Wextra -Werror -Ofast
 
 HEADER = ./header
-HEAD_PATH = header/rtv1.h
+HEAD_PATH = header/rt.h
 
 MLX_PATH = includes/minilibx/
 MLX = $(addprefix $(MLX_PATH), libmlx.a)

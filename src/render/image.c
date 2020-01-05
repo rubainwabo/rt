@@ -1,4 +1,4 @@
-#include "rtv1.h"
+#include "rt.h"
 
 static void	alloc_data(t_rt *specs, t_image *img)
 {

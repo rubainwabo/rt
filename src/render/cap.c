@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	compute_oc(t_vec3 *oc, t_ray *ray, double t)
 {

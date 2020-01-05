@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void	sphere_inter2(t_rt *specs, t_ray *ray, t_var *v)
 {
