@@ -472,15 +472,5 @@ int 	move_cam(int button, int x, int y, t_rt *specs)
 		specs->view_dir = vector_matrix_multiply(specs->view_dir, specs->view_rot);
 		draw_image(specs);
 	}
-	if (button == M_SCR_U && specs->event == EVENT)
-	{
-		specs->camera.z -= 1;
-		draw_image(specs);
-	}
-	if (button == M_SCR_D && specs->event == EVENT)
-	{
-		specs->camera.z += 1;
-		draw_image(specs);
-	}
 	return (0);
 }

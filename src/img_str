@@ -1,0 +1,266 @@
+render/user_interface.c:	img->ptr = mlx_new_image(specs->mlx, x, y);
+render/user_interface.c:	mlx_put_image_to_window(specs->mlx, specs->win, img.ptr, 0, 0);
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 50, WHITE, "CAMERA MOVEMENTS :");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 50, RED, "OFF");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 100, WHITE, "ALLOW CAMERA MOVEMENT :");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 100, GREEN, "SPACE");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 150, WHITE, "ANTI ALIASING :");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 150, GREEN, "L");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 200, WHITE, "FILTER SEPIA : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 200, GREEN, "D");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 250, WHITE, "FILTER GRAY : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 250, GREEN, "A");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 300, WHITE, "FILTER BLUE : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 300, GREEN, "F");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 350, WHITE, "FILTER GREEN : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 350, GREEN, "G");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 400, WHITE, "FILTER PURPLE : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 400, GREEN, "H");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 450, WHITE, "SAVE IMAGE : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 450, GREEN, "S");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 50, WHITE, "CAMERA MOVEMENTS :");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 50, GREEN, "ON");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 100, WHITE, "NATIVE MODE :");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 100, GREEN, "SPACE");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 150, WHITE, "ANTI ALIASING :");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 150, GREEN, "L");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 200, WHITE, "MOVE CAMERA POSITION : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 200, GREEN, "ARROW KEYS");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 250, WHITE, "MOVE CAMERA DIRECTION : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 250, GREEN, "LEFT MOUSE CLICK");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 20, 300, WHITE, "SAVE IMAGE : ");
+render/user_interface.c:	mlx_string_put(specs->mlx, specs->win, 200, 300, GREEN, "S");
+render/cone.c:	tmp = vec3_scale(specs->axis, height, '*');
+render/cone.c:	tmp2 = vec3_add(specs->center, tmp, '+');
+render/cone.c:	hplus = tan(specs->angle) * dist;
+render/cone.c:	tmp = vec3_scale(specs->axis, height, '*');
+render/cone.c:	tmp2 = vec3_add(specs->center, tmp, '+');
+render/cone.c:	sect[2] = vec3_add(sect[0], specs->center, '-');
+render/cone.c:	if ((hi[0] = vec3_dot(sect[2], specs->axis)) > specs->max ||
+render/cone.c:						hi[0] < specs->min)
+render/cone.c:	sect[3] = vec3_add(sect[1], specs->center, '-');
+render/cone.c:	if ((hi[1] = vec3_dot(sect[3], specs->axis)) > specs->max ||
+render/cone.c:						hi[1] < specs->min)
+render/cone.c:		ray->surf = specs->surf;
+render/cone.c:	oc = vec3_add(ray->origin, specs->center, '-');
+render/cone.c:	abc[0] = pow(vec3_dot(ray->direct, specs->axis), 2)
+render/cone.c:			- pow(cos(specs->angle), 2);
+render/cone.c:	abc[1] = 2 * ((vec3_dot(ray->direct, specs->axis)
+render/cone.c:			* vec3_dot(oc, specs->axis)) - (vec3_dot(ray->direct, oc)
+render/cone.c:				* pow(cos(specs->angle), 2)));
+render/cone.c:	abc[2] = pow(vec3_dot(oc, specs->axis), 2) - (vec3_dot(oc, oc)
+render/cone.c:			* pow(cos(specs->angle), 2));
+render/texture.c:	offset = (((int)(u * specs->textures[index]->width) + (int)(v * specs->textures[index]->height) * specs->textures[index]->width));
+render/texture.c:	ft_memcpy((void *)&color, (void *)specs->textures[index]->data + (offset * 4), 4);
+render/event.c:	img->ptr = mlx_xpm_file_to_image(specs->mlx, path, &img->width, &img->height);
+render/event.c:	specs->textures[0] = create_image(specs, "textures/posx.xpm");
+render/event.c:	specs->textures[1] = create_image(specs, "textures/negx.xpm");
+render/event.c:	specs->textures[2] = create_image(specs, "textures/posy.xpm");
+render/event.c:	specs->textures[3] = create_image(specs, "textures/negy.xpm");
+render/event.c:	specs->textures[4] = create_image(specs, "textures/posz.xpm");
+render/event.c:	specs->textures[5] = create_image(specs, "textures/negz.xpm");
+render/event.c:		v.red = ft_min(255.0, (((unsigned char)specs->img_str2[i + 2] * .393) + ((unsigned char)specs->img_str2[i + 1] * .769) + ((unsigned char)specs->img_str2[i] * .189)));
+render/event.c:		v.green = ft_min(255.0, (((unsigned char)specs->img_str2[i + 2] * .349) + ((unsigned char)specs->img_str2[i + 1] * .686) + ((unsigned char)specs->img_str2[i] * .168)));
+render/event.c:		v.blue = ft_min(255.0, (((unsigned char)specs->img_str2[i + 2] * .272) + ((unsigned char)specs->img_str2[i + 1] * .534) + ((unsigned char)specs->img_str2[i] * .131)));
+render/event.c:		specs->img_str2[i + 2] = v.red;
+render/event.c:		specs->img_str2[i + 1] = v.green;
+render/event.c:		specs->img_str2[i] = v.blue;
+render/event.c:		gray = (int)(((unsigned char)specs->img_str2[i + 2] * 0.3) + ((unsigned char)specs->img_str2[i + 1] * 0.59) + ((unsigned char)specs->img_str2[i] * 0.11));
+render/event.c:		specs->img_str2[i + 2] = gray;
+render/event.c:		specs->img_str2[i + 1] = gray;
+render/event.c:		specs->img_str2[i] = gray;
+render/event.c:		gray = (int)(((unsigned char)specs->img_str2[i + 2] * 0.3) + ((unsigned char)specs->img_str2[i + 1] * 0.59) + ((unsigned char)specs->img_str2[i] * 0.11));
+render/event.c:		specs->img_str2[i + 2] = 0;
+render/event.c:		specs->img_str2[i + 1] = gray;
+render/event.c:		specs->img_str2[i] = gray;
+render/event.c:		gray = (int)(((unsigned char)specs->img_str2[i + 2] * 0.3) + ((unsigned char)specs->img_str2[i + 1] * 0.59) + ((unsigned char)specs->img_str2[i] * 0.11));
+render/event.c:		specs->img_str2[i + 2] = gray;
+render/event.c:		specs->img_str2[i + 1] = gray;
+render/event.c:		specs->img_str2[i] = 0;
+render/event.c:		gray = (int)(((unsigned char)specs->img_str2[i + 2] * 0.3) + ((unsigned char)specs->img_str2[i + 1] * 0.59) + ((unsigned char)specs->img_str2[i] * 0.11));
+render/event.c:		specs->img_str2[i + 2] = 0;
+render/event.c:		specs->img_str2[i + 1] = gray;
+render/event.c:		specs->img_str2[i] = 0;
+render/event.c:			v.coord[0] = (j * 8) + (i * 2) * specs->size_line;
+render/event.c:			v.coord[1] = (j * 8) + 4 + (i * 2) * specs->size_line;
+render/event.c:			v.coord[2] = (j * 8) + ((i * 2) + 1) * specs->size_line;
+render/event.c:			v.coord[3] = (j * 8) + 4  + ((i * 2) + 1) * specs->size_line;
+render/event.c:			ft_memcpy(&v.pix[0], specs->img_str + v.coord[0], 4);
+render/event.c:			ft_memcpy(&v.pix[1], specs->img_str + v.coord[1], 4);
+render/event.c:			ft_memcpy(&v.pix[2], specs->img_str + v.coord[2], 4);
+render/event.c:			ft_memcpy(&v.pix[3], specs->img_str + v.coord[3], 4);
+render/event.c:			v.coord[4] = i * specs->size_line2 + (j * 4);
+render/event.c:			specs->img_str2[v.coord[4]] = (((v.pix[0] & 0xff) + (v.pix[1] & 0xff) + (v.pix[2] & 0xff) + (v.pix[3] & 0xff)) / 4);
+render/event.c:			specs->img_str2[v.coord[4] + 1] = ((((v.pix[0] >> 8) & 0xff) + ((v.pix[1] >> 8) & 0xff) + ((v.pix[2] >> 8) & 0xff) + ((v.pix[3] >> 8) & 0xff)) / 4);
+render/event.c:			specs->img_str2[v.coord[4] + 2] = ((((v.pix[0] >> 16) & 0xff) + ((v.pix[1] >> 16) & 0xff) + ((v.pix[2] >> 16) & 0xff) + ((v.pix[3] >> 16) & 0xff)) / 4);
+render/event.c:	while (i < specs->h_img)
+render/event.c:		while (j < specs->w_img)
+render/event.c:			v.coord[4] = (j * 4) + i * specs->size_line;
+render/event.c:			ft_memcpy(&v.pix[0], specs->img_str + v.coord[4], 4);
+render/event.c:			v.coord[0] = (j * 8) + i * 2 * specs->size_line2 ;
+render/event.c:			v.coord[2] = (j * 8) + ((i * 2) + 1) * specs->size_line2;
+render/event.c:			specs->img_str2[v.coord[0]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[0] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[0] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:			specs->img_str2[v.coord[1]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[1] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[1] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:			specs->img_str2[v.coord[2]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[2] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[2] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:			specs->img_str2[v.coord[3]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[3] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[3] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:	specs->img_str2[coord] = pix & 0xff;
+render/event.c:	specs->img_str2[coord + 1] = (pix >> 8) & 0xff;
+render/event.c:	specs->img_str2[coord + 2] = (pix >> 16) & 0xff;
+render/event.c:	while (i < specs->h_img)
+render/event.c:		while (j < specs->w_img)
+render/event.c:			v.coord[16] = (j * 4) + i * specs->size_line;
+render/event.c:			ft_memcpy(&v.pix[0], specs->img_str + v.coord[16], 4);
+render/event.c:			v.coord[0] = (j * 16) + i * 4 * specs->size_line2 ;
+render/event.c:			v.coord[4] = (j * 16) + ((i * 4) + 1) * specs->size_line2;
+render/event.c:			v.coord[8] = (j * 16) + ((i * 4) + 2) * specs->size_line2;
+render/event.c:			v.coord[12] = (j * 16) + ((i * 4) + 3) * specs->size_line2;
+render/event.c:			specs->img_str2[v.coord[0]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[0] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[0] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:			specs->img_str2[v.coord[1]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[1] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[1] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:			specs->img_str2[v.coord[2]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[2] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[2] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:			specs->img_str2[v.coord[3]] = v.pix[0] & 0xff;
+render/event.c:			specs->img_str2[v.coord[3] + 1] = (v.pix[0] >> 8) & 0xff;
+render/event.c:			specs->img_str2[v.coord[3] + 2] = (v.pix[0] >> 16) & 0xff;
+render/event.c:	specs->w_img = W_IMG * 2;
+render/event.c:	specs->h_img = H_IMG * 2;
+render/event.c:	if (!(specs->img = mlx_new_image(specs->mlx, specs->w_img, specs->h_img)))
+render/event.c:	if (!(specs->img_str = mlx_get_data_addr(specs->img, &specs->bpp,
+render/event.c:	&specs->size_line, &specs->endian)))
+render/event.c:	if (!(specs->img2 = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
+render/event.c:	if (!(specs->img_str2 = mlx_get_data_addr(specs->img2, &specs->bpp,
+render/event.c:	&specs->size_line2, &specs->endian)))
+render/event.c:	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:	specs->w_img = W_IMG / 2;
+render/event.c:	specs->h_img = H_IMG / 2;
+render/event.c:	if (!(specs->img = mlx_new_image(specs->mlx, specs->w_img, specs->h_img)))
+render/event.c:	if (!(specs->img_str = mlx_get_data_addr(specs->img, &specs->bpp,
+render/event.c:	&specs->size_line, &specs->endian)))
+render/event.c:	if (!(specs->img2 = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
+render/event.c:	if (!(specs->img_str2 = mlx_get_data_addr(specs->img2, &specs->bpp,
+render/event.c:	&specs->size_line2, &specs->endian)))
+render/event.c:	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:	specs->w_img = W_IMG / 4;
+render/event.c:	specs->h_img = H_IMG / 4;
+render/event.c:	if (!(specs->img = mlx_new_image(specs->mlx, specs->w_img, specs->h_img)))
+render/event.c:	if (!(specs->img_str = mlx_get_data_addr(specs->img, &specs->bpp,
+render/event.c:	&specs->size_line, &specs->endian)))
+render/event.c:	if (!(specs->img2 = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
+render/event.c:	if (!(specs->img_str2 = mlx_get_data_addr(specs->img2, &specs->bpp,
+render/event.c:	&specs->size_line2, &specs->endian)))
+render/event.c:	mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:	specs->w_img = W_IMG;
+render/event.c:	specs->h_img = H_IMG;
+render/event.c:	if (!(specs->img = mlx_new_image(specs->mlx, W_IMG, H_IMG)))
+render/event.c:	if (!(specs->img_str = mlx_get_data_addr(specs->img, &specs->bpp,
+render/event.c:	&specs->size_line, &specs->endian)))
+render/event.c:	mlx_put_image_to_window(specs->mlx, specs->win, specs->img, POS_X, POS_Y);
+render/event.c:	if (specs->event == NO_EVENT)
+render/event.c:		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
+render/event.c:	if (specs->event == NO_EVENT)
+render/event.c:		specs->camera.x -= 1.25;
+render/event.c:		specs->camera.x += 1.25;
+render/event.c:		specs->camera.y -= 1.25;
+render/event.c:		specs->camera.y += 1.25;
+render/event.c:		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:		mlx_put_image_to_window(specs->mlx, specs->win, specs->img2, POS_X, POS_Y);
+render/event.c:	if (specs->event == EVENT)
+render/event.c:		specs->event = !specs->event;
+render/event.c:		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
+render/event.c:		specs->event = NO_EVENT;
+render/event.c:	if (button == M_CLK_L && specs->event == EVENT)
+render/event.c:		specs->first = 0;
+render/event.c:		xm = ((2.0 * (double)(x - POS_X) / W_IMG) - 1.0) * specs->alpha * specs->aspect;
+render/event.c:		ym = (1.0 - (2.0 * (double)y / H_IMG)) * specs->alpha;
+render/event.c:		specs->view_dir.x = xm;
+render/event.c:		specs->view_dir.y = ym;
+render/event.c:		specs->view_dir.z = -1.0;
+render/event.c:		specs->view_dir = normalise(specs->view_dir);
+render/event.c:		specs->view_dir = vector_matrix_multiply(specs->view_dir, specs->view_rot);
+render/ft_thread.c:		.y_end = specs->h_img / n, .specs = specs};
+render/ft_thread.c:		.y_end = (i + 1) * specs->h_img / n, .specs = specs};
+render/lighting.c:	specs->x = specs->x;
+render/lighting.c:	l = specs->light_list;
+render/cylinder.c:	sect[2] = vec3_add(sect[0], specs->center, '-');
+render/cylinder.c:	if ((hi[0] = vec3_dot(sect[2], specs->axis)) > specs->max || hi[0] < 0)
+render/cylinder.c:	sect[3] = vec3_add(sect[1], specs->center, '-');
+render/cylinder.c:	if ((hi[1] = vec3_dot(sect[3], specs->axis)) > specs->max || hi[1] < 0)
+render/cylinder.c:		ray->surf = specs->surf;
+render/cylinder.c:		sect[2] = vec3_add(specs->center, vec3_scale(specs->axis, hi[0],
+render/cylinder.c:	oc = vec3_add(ray->origin, specs->center, '-');
+render/cylinder.c:	abc[0] = 1 - (vec3_dot(ray->direct, specs->axis) * vec3_dot(ray->direct,
+render/cylinder.c:			specs->axis));
+render/cylinder.c:			specs->axis) * vec3_dot(oc, specs->axis)));
+render/cylinder.c:	abc[2] = vec3_dot(oc, oc) - (vec3_dot(oc, specs->axis) *
+render/cylinder.c:			vec3_dot(oc, specs->axis)) - (specs->radius * specs->radius);
+render/export.c:		color[0] = specs->img_str2[i + 2];
+render/export.c:		color[1] = specs->img_str2[i + 1];
+render/export.c:		color[2] = specs->img_str2[i];
+render/export.c:	if (!(name = extract_name(specs->file_name)) ||
+render/export.c:	mlx_string_put(specs->mlx, specs->win, 10, 10, RED, "saved!");
+render/cap.c:	v.p.point = specs->center;
+render/cap.c:	v.p.normal = specs->axis;
+render/cap.c:	v.p.surf = specs->surf;
+render/cap.c:	if (v.t < ray->t && v.t > NEAR && v.dist < specs->radius)
+render/cap.c:	v.p.point = vec3_scale(specs->axis, specs->max, '*');
+render/cap.c:	v.p.point = vec3_add(specs->center, v.p.point, '+');
+render/cap.c:	v.p.normal = specs->axis;
+render/cap.c:	v.p.surf = specs->surf;
+render/cap.c:	if (v.t < ray->t && v.t > NEAR && v.dist < specs->radius)
+render/cap.c:	v.p.point = vec3_scale(specs->axis, specs->min, '*');
+render/cap.c:	v.p.point = vec3_add(specs->center, v.p.point, '+');
+render/cap.c:	v.p.normal = specs->axis;
+render/cap.c:	v.p.surf = specs->surf;
+render/cap.c:	v.rad = tan(specs->angle) * ft_abs(specs->min);
+render/cap.c:	v.p.point = vec3_scale(specs->axis, specs->max, '*');
+render/cap.c:	v.p.point = vec3_add(specs->center, v.p.point, '+');
+render/cap.c:	v.p.normal = specs->axis;
+render/cap.c:	v.p.surf = specs->surf;
+render/cap.c:	v.rad = tan(specs->angle) * ft_abs(specs->max);
+render/initialise.c:			mlx_destroy_window(specs->mlx, specs->win);
+render/initialise.c:		mlx_destroy_window(specs->mlx, specs->win);
+render/initialise.c:	specs->nb_line = count;
+render/initialise.c:	if (!(specs->input = (char **)malloc(sizeof(char *)
+render/initialise.c:		free_array(specs->input, FAIL, specs, NULL);
+render/initialise.c:			free_array(specs->input, i, specs, line);
+render/initialise.c:		if (!(specs->input[++i] = (char *)malloc(sizeof(char) *
+render/initialise.c:			free_array(specs->input, i, specs, line);
+render/initialise.c:			specs->input[i][j] = line[j];
+render/initialise.c:		specs->input[i][ft_strlen(line)] = '\0';
+render/initialise.c:	specs->input[i + 1] = NULL;
+render/ray_utils.c:	if (specs->first++ == 0)
+render/ray_utils.c:		specs->view_rot = rot_from_base(specs->view_dir, base, 0);
+render/ray_utils.c:		//specs->alpha = tan(specs->alpha / 2);
+render/ray_utils.c:	ray.x = ((2.0 * x) - 1.0) * specs->alpha * specs->aspect;
+render/ray_utils.c:	ray.y = (1.0 - (2.0 * y)) * specs->alpha;
+render/ray_utils.c:	ray = vector_matrix_multiply(ray, specs->view_rot);
+render/ray_utils.c:	o = specs->obj_list;
+render/ray_utils.c:		specs->fct_ptr[o->id](specs, ray, o->obj);
+render/ray_utils.c:	o = specs->obj_list;
+render/ray_utils.c:		specs->fct_ptr[o->id](specs, ray, o->obj);
+render/main.c:	ray.origin = specs->camera;
+render/main.c:	ray.direct = pixel_to_world((float)x / specs->w_img, (float)y / specs->h_img, specs);
+render/main.c:		while (++x < d->specs->w_img)
+render/colouring.c:	specs->img_str[(y * specs->w_img + x) * 4] = specs->far_col & 0xff;
+render/colouring.c:	specs->img_str[(y * specs->w_img + x) * 4 + 1] =
+render/colouring.c:			(specs->far_col >> 8) & 0xff;
+render/colouring.c:	specs->img_str[(y * specs->w_img + x) * 4 + 2] =
+render/colouring.c:			(specs->far_col >> 16) & 0xff;
+render/colouring.c:	specs->img_str[(y * specs->w_img + x) * 4] = b;
+render/colouring.c:	specs->img_str[(y * specs->w_img + x) * 4 + 1] = g;
+render/colouring.c:	specs->img_str[(y * specs->w_img + x) * 4 + 2] = r;

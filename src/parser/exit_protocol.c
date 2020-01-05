@@ -57,7 +57,7 @@ void	exit_protocol2(t_rt *specs, int p, char *err)
 	else
 		ft_putendl_fd(err, 2);
 	free_all_lists(specs);
-	mlx_destroy_image(specs->mlx, specs->img);
+	mlx_destroy_image(specs->mlx, specs->img2);
 	mlx_destroy_window(specs->mlx, specs->win);
 	if (p == 19)
 		exit(EXIT_SUCCESS);

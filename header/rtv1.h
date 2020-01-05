@@ -265,5 +265,6 @@ void				draw_backgrd(t_rt *specs);
 void				possible_events(t_rt *specs);
 void				possible_events2(t_rt *specs);
 void				save_file(t_rt *specs);
+void				rot_from_base2(double a, t_vec3 *u, t_mat3 *o);
 
 #endif
