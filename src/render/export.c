@@ -34,7 +34,7 @@ static char		*extract_name(char *file_name)
 	if (!(name = ft_strdup(file_name)))
 		return (NULL);
 	name = putnum(name);
-	if (!(tmp = ft_strjoin("save_images", name)))
+	if (!(tmp = ft_strjoin("images_saved", name)))
 	{
 		free(name);
 		return (NULL);
@@ -77,9 +77,9 @@ void		fill_file(t_rt *specs, FILE *fp)
 	set_title(fp);
 	while (i < W_IMG * H_IMG * 4)
 	{
-		color[0] = specs->img_str2[i + 2];
-		color[1] = specs->img_str2[i + 1];
-		color[2] = specs->img_str2[i];
+		color[0] = specs->img_s->data[i + 2];
+		color[1] = specs->img_s->data[i + 1];
+		color[2] = specs->img_s->data[i];
 		i += 4;
 		fwrite(color, 1, 3, fp);
 	}
@@ -91,12 +91,12 @@ void		save_file(t_rt *specs)
 	char	*name;
 
 	if (!(name = extract_name(specs->file_name)) ||
-			!(fp = fopen(name, "wb")))
+		!(fp = fopen(name, "wb")))
 	{
 		ft_putstr_fd("Error : failed to save image\n", 2);
 		return ;
 	}
 	free(name);
 	fill_file(specs, fp);
-	mlx_string_put(specs->mlx, specs->win, 10, 10, RED, "saved!");
+	mlx_string_put(specs->mlx, specs->win, 10, 10, RED, "image saved");
 }

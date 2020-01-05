@@ -81,18 +81,15 @@ typedef struct		s_image
 
 typedef struct		s_rt
 {
+	t_image			*img;
+	t_image			*img_s;
+	t_image			*ui;
 	char			*file_name;
 	int				w_img;
 	int				h_img;
 	short			event;
 	void			*mlx;
 	void			*win;
-	void			*img;
-	void			*img2;
-	int				bpp;
-	int				size_line;
-	int				size_line2;
-	int				endian;
 	t_vec3			camera;
 	t_vec3			view_dir;
 	t_image			*textures[6];
@@ -101,8 +98,6 @@ typedef struct		s_rt
 	double			alpha;
 	double			aspect;
 	char			**input;
-	char			*img_str;
-	char			*img_str2;
 	t_obj			*obj_list;
 	t_obj			*light_list;
 	int				(*fct_ptr[4])(struct s_rt *specs, t_ray *, void *);
@@ -227,6 +222,14 @@ void				parse_lights_d(int *i, t_rt *specs);
 ** RENDERING
 */
 
+/*
+** image
+*/
+
+t_image				*create_image(t_rt *specs, char *path, int x, int y);
+void				destroy_img(t_rt *specs, t_image *img);
+void				draw_image(t_rt *specs);
+
 int					sphere_intersect(t_rt *specs, t_ray *ray, void *hit_object);
 int					plane_intersect(t_rt *specs, t_ray *ray, void *hit_object);
 int					cone_intersect(t_rt *specs, t_ray *ray, void *hit_object);
@@ -244,7 +247,6 @@ int					cap_intersect_top(t_ray *ray, t_cyl *specs);
 int					cap_intersect_bot(t_ray *ray, t_cyl *specs);
 int					cone_cap_intersect_bot(t_ray *ray, t_cone *specs);
 int					cone_cap_intersect_top(t_ray *ray, t_cone *specs);
-int					draw_image(t_rt *specs);
 void				normal_towards_cam(t_ray *ray);
 void				*pixel_loop(void *data);
 int					solve_polynom_2(double *abc, double *t1, double *t2);
@@ -266,5 +268,29 @@ void				possible_events(t_rt *specs);
 void				possible_events2(t_rt *specs);
 void				save_file(t_rt *specs);
 void				rot_from_base2(double a, t_vec3 *u, t_mat3 *o);
+
+/*
+** filters
+*/
+
+void		apply_grayscale(t_rt *specs);
+void		apply_sepia(t_rt *specs);
+void		apply_blue(t_rt *specs);
+void		apply_purple(t_rt *specs);
+
+/*
+** sampling
+*/
+
+void		super_image(t_rt *specs);
+void		sub_image(t_rt *specs);
+void		sub2_image(t_rt *specs);
+void		native_image(t_rt *specs);
+
+/*
+** features
+*/
+
+void		reverse_chan(t_rt *specs);
 
 #endif

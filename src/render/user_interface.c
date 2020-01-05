@@ -1,28 +1,21 @@
 #include "rtv1.h"
 
-static void		init_ui_img(t_image *img, t_rt *specs, int x, int y)
-{
-	img->ptr = mlx_new_image(specs->mlx, x, y);
-	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->sizeline, &img->endian);
-}
-
 void    draw_backgrd(t_rt *specs)
 {
 	int		i;
-	t_image	img;
 	int		size;
 
 	size = HEIGHT * POS_X * 4;
-	init_ui_img(&img, specs, POS_X, HEIGHT);
+	specs->ui = create_image(specs, NULL, POS_X, HEIGHT);
 	i = 0;
 	while (i < size)
 	{
-		img.data[i] = ((int)(0x000088 * (double)i / size)) & 0xff;;
-		img.data[i + 1] = 0;
-		img.data[i + 2] = 0;
+		specs->ui->data[i] = ((int)(0x000088 * (double)i / size)) & 0xff;;
+		specs->ui->data[i + 1] = 0;
+		specs->ui->data[i + 2] = 0;
 		i += 4;
 	}
-	mlx_put_image_to_window(specs->mlx, specs->win, img.ptr, 0, 0);
+	mlx_put_image_to_window(specs->mlx, specs->win, specs->ui->ptr, 0, 0);
 }
 
 void	possible_events2(t_rt *specs)
@@ -40,7 +33,7 @@ void	possible_events2(t_rt *specs)
 	mlx_string_put(specs->mlx, specs->win, 200, 250, GREEN, "A");
 	mlx_string_put(specs->mlx, specs->win, 20, 300, WHITE, "FILTER BLUE : ");
 	mlx_string_put(specs->mlx, specs->win, 200, 300, GREEN, "F");
-	mlx_string_put(specs->mlx, specs->win, 20, 350, WHITE, "FILTER GREEN : ");
+	mlx_string_put(specs->mlx, specs->win, 20, 350, WHITE, "REV. CHANNEL : ");
 	mlx_string_put(specs->mlx, specs->win, 200, 350, GREEN, "G");
 	mlx_string_put(specs->mlx, specs->win, 20, 400, WHITE, "FILTER PURPLE : ");
 	mlx_string_put(specs->mlx, specs->win, 200, 400, GREEN, "H");
