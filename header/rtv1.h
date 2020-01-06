@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 13:57:28 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/17 18:08:06 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/19 22:37:12 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,15 @@
 # include <pthread.h>
 # include "../includes/minilibx_macos/mlx.h"
 # include "../includes/libft/libft.h"
-# define THREAD_COUNT 1
+# include "key.h"
+# define THREAD_COUNT 64
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
-# define WIDTH 1800
+# define WIDTH 2000
 # define HEIGHT 1200
-# define W_IMG 1800
+# define W_IMG 2000
 # define H_IMG 1200
-# define RIGHT 123
-# define LEFT 124
-# define UP 125
-# define DOWN 126
 # define BLACK 0x0
 # define WHITE 0xffffff
 # define BLUE 0x0000ff
@@ -83,12 +80,16 @@ typedef struct		s_obj
 
 typedef struct		s_rt
 {
+	int				w_img;
+	int				h_img;
 	short			event;
 	void			*mlx;
 	void			*win;
 	void			*img;
+	void			*img2;
 	int				bpp;
 	int				size_line;
+	int				size_line2;
 	int				endian;
 	t_vec3			camera;
 	t_vec3			view_dir;
@@ -99,6 +100,7 @@ typedef struct		s_rt
 	double			aspect;
 	char			**input;
 	char			*img_str;
+	char			*img_str2;
 	t_obj			*obj_list;
 	t_obj			*light_list;
 	int				(*fct_ptr[4])(struct s_rt *specs, t_ray *, void *);
@@ -192,6 +194,8 @@ typedef struct		s_var
 	t_plane			*plane;
 	t_sphere		*sphere;
 	t_vec3			ext;
+	int				pix[4];
+	int				coord[5];
 }					t_var;
 
 /*

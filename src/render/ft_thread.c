@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/01 14:52:15 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/09 20:02:06 by rkamegne         ###   ########.fr       */
+/*   Updated: 2019/12/18 14:56:55 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	init_thread(t_rt *specs, t_thread data[], int n)
 	int		i;
 
 	data[0] = (t_thread){.y_start = 0,
-		.y_end = H_IMG / n, .specs = specs};
+		.y_end = specs->h_img / n, .specs = specs};
 	i = 0;
 	while (++i < n)
 	{
 		data[i] = (t_thread){.y_start = data[i - 1].y_end,
-		.y_end = (i + 1) * H_IMG / n, .specs = specs};
+		.y_end = (i + 1) * specs->h_img / n, .specs = specs};
 	}
 }
 
