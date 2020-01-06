@@ -2,6 +2,7 @@ camera
 	position(0, 0, 10)
 	direction(0, 0, -1)
 	field_of_view(90.0)
+	abient_light(0.1)
 
 light
 	light(distant)
@@ -19,6 +20,8 @@ objects
         normal(0, 0, 1)
         color(1, 1, 0.5)
 		type(0)
+		texture(brick)
+		bump(1)
 
 	object(cylinder)
 		origin(-3, 0, 0)
@@ -27,3 +30,4 @@ objects
 		radius(2)
 		color(1, 0.36, 0.2)
 		type(0)
+		texture(none)

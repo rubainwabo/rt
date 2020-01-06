@@ -1,23 +1,26 @@
 camera
-	position(0, 0, 10)
-	direction(0, 0, -0.5)
-    field_of_view(90.0)
+		position(0, 0, 10)
+		direction(0, 0, -0.5)
+ 		field_of_view(90.0)
+		abient_light(0.1)
 
 lights
 	light(distant)
 		direct(0, 0, 1)
-	    color(1, 1, 1)
+	  color(1, 1, 1)
 		intensity(0.5)
 
 objects
-    object(sphere)
+  object(sphere)
 		origin(-4, -3, 0)
 		color(1, 0.25, 0.25)
 		radius(1.5)
 		type(0)
+		texture(brick)
 
-    object(sphere)
+  object(sphere)
 		origin(4, -3, 0)
 		color(1, 0.35, 0.65)
 		radius(1.5)
 		type(0)
+		texture(brick)

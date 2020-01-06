@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 17:46:50 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/17 15:46:11 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:04:53 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,9 @@ void	lighting(t_ray *ray, t_rt *specs)
 
 	l = specs->light_list;
 	shadow_ray.origin = ray->hitpoint;
-	ray->colour = vec3_init(0.1 * ray->surf->d_col.x,
-	0.1 * ray->surf->d_col.y, 0.1 * ray->surf->d_col.z);
+	ray->colour = vec3_init(specs->abient_l * ray->surf->d_col.x,
+							specs->abient_l * ray->surf->d_col.y,
+							specs->abient_l * ray->surf->d_col.z);
 	while (l)
 	{
 		if (l->id == 5)

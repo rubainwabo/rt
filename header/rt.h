@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 18:42:12 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 21:37:24 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_surf
 	float			ior;
 	int				type;
 	t_image			*texture;
+	int				text;
 }					t_surf;
 
 typedef struct		s_ray
@@ -97,6 +98,7 @@ typedef struct		s_rt
 	double			fov;
 	t_mat3			view_rot;
 	double			alpha;
+	double			abient_l;
 	double			aspect;
 	char			**input;
 	t_obj			*obj_list;
@@ -111,6 +113,7 @@ typedef struct		s_rt
 	int				cache_id;
 	int				first;
 	int				aliasing;
+	int				bump;
 }					t_rt;
 
 typedef struct		s_thread
@@ -219,6 +222,17 @@ t_surf				*set_surface(t_rt *specs);
 void				free_surface(int id, void *ptr);
 void				parse_lights_s(int *i, t_rt *specs);
 void				parse_lights_d(int *i, t_rt *specs);
+void				parse_cone(int *i, t_rt *specs);
+void				parse_cylinder(int *i, t_rt *specs);
+
+/*
+** FREE_SURF_TEXTURE
+*/
+
+void				free_surf_text_sphere(t_rt *specs, t_surf *surf);
+void				free_surf_text_cyl(t_rt *specs, t_surf *surf);
+void				free_surf_text_cone(t_rt *specs, t_surf *surf);
+void				free_surf_text_plane(t_rt *specs, t_surf *surf);
 
 /*
 ** RENDERING
@@ -308,6 +322,7 @@ void				reverse_chan(t_rt *specs);
 ** textures
 */
 
+void				set_texture(t_rt *specs, char *str, t_surf *surf);
 t_vec3				plane_texturing(t_plane *p, t_ray *ray);
 t_vec3				sphere_texturing(t_sphere *s, t_ray *ray);
 

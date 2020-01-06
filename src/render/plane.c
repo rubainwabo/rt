@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 14:29:57 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/06 18:21:27 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 20:02:32 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,13 @@ int		plane_intersect(t_rt *spec, t_ray *ray, void *hit_object)
 		oc = vec3_init(0, -ray->hitnormal.z, ray->hitnormal.y);
 		if (vec3_dot(ray->hitnormal, vec3_init(1, 0, 0)) > 0.999)
 			oc = vec3_init(-ray->hitnormal.y, ray->hitnormal.x, 0);
-		//bump_map(ray, p, 2, oc);
+		if (spec->bump == 1)
+			bump_map(ray, p, 2, oc);
 		//we need to define a direction along which to bump map the surface
 		//for every plane except the one with normal 1, 0, 0 we can just choose 0, -nz, ny
 		//for plane with normal 1, 0, 0, choose -ny, nx, 0
-		ray->surf->d_col = plane_texturing(p, ray);
+		if (p->surf->text == 1)
+			ray->surf->d_col = plane_texturing(p, ray);
 		normal_towards_cam(ray);
 		return (1);
 	}

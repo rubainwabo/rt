@@ -6,20 +6,20 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:31 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 16:54:30 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 20:52:38 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	alloc_data(t_rt *specs, t_image *img)
+static void	alloc_data(t_image *img)
 {
 	if (!(img->data = mlx_get_data_addr(img->ptr, &img->bpp,
 		&img->sizeline, &img->endian)))
 	{
 		free(img);
 		free(img->ptr);
-		exit_protocol2(specs, -1, "failed to created the img string");
+		exit(1);
 	}
 }
 
@@ -28,7 +28,7 @@ t_image		*create_image(t_rt *specs, char *path, int x, int y)
 	t_image		*img;
 
 	if (!(img = (t_image *)ft_memalloc(sizeof(t_image))))
-		exit_protocol2(specs, -1, "img struct malloc failed");
+		exit(1);
 	if (!path)
 		img->ptr = mlx_new_image(specs->mlx, x, y);
 	else
@@ -37,9 +37,9 @@ t_image		*create_image(t_rt *specs, char *path, int x, int y)
 	if (!img->ptr)
 	{
 		free(img);
-		exit_protocol2(specs, -1, "failed to created the img pointer");
+		exit(1);			
 	}
-	alloc_data(specs, img);
+	alloc_data(img);
 	return (img);
 }
 

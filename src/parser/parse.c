@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:58:30 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/06 14:18:01 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 19:00:04 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void		parse_scene(int *i, t_rt *specs)
 	if (specs->fov > 150 || specs->fov < 20)
 		specs->fov = 90.0;
 	specs->alpha = (specs->fov / 180.0) * M_PI;
+	specs->abient_l = ft_atof(move(i, &j, specs));
 }
 
 void		parse_lights(int *i, t_rt *specs)

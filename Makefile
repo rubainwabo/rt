@@ -6,7 +6,7 @@
 #    By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/16 16:11:42 by krutten           #+#    #+#              #
-#    Updated: 2020/01/06 16:42:26 by rkamegne         ###   ########.fr        #
+#    Updated: 2020/01/06 21:33:44 by rkamegne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ NAME = rt
 
 SAVE = images_saved/
 
-PARSER = parse.c object_utils.c parse_objects.c manage_object.c exit_protocol.c
+PARSER = parse.c object_utils.c parse_objects.c manage_object.c exit_protocol.c\
+		parse_texture.c free_texture.c parse_objects2.c  
 
 RENDER = sphere.c cone.c cylinder.c cap.c mat3_scale.c reflect.c ft_thread.c utils.c\
 		ray_utils.c main.c lighting.c event.c plane.c initialise.c colouring.c texture.c\

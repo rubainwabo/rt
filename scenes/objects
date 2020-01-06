@@ -2,6 +2,7 @@ camera
 	position(1, 0, 10)
 	direction(0.3, 0, -1)
 	field_of_view(90.0)
+	abient_light(0.1)
 
 lights
 	light(distant)
@@ -20,12 +21,14 @@ objects
 		color(0.1, 1, 0.5)
 		radius(3)
 		type(2)
+		texture(none)
 
 	object(sphere)
 		origin(0, 0, 3)
 		color(1, 0.22, 0.33)
 		radius(1.5)
 		type(0)
+		texture(none)
 		
 	object(cone)
 		center(3, 5, 1)
@@ -35,9 +38,12 @@ objects
 		angle(30)
 		color(0.001, 1, 1)
 		type(0)
+		texture(none)
 
 	object(plane)
         point(-2, -1, 0)
         normal(1, 0, 0)
         color(0, 0, 1)
 		type(0)
+		texture(none)
+		bump(0)

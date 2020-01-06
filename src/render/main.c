@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 14:19:15 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/06 18:47:08 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 21:21:18 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 		reflected_ray(ray, &refl);
 		cast_ray(&refl, specs, original);
 		ray->colour = refl.colour;
-		return (colour_mask(0.8, ray->surf->d_col, ray)); //0.8 % reflec
+		return (colour_mask(0.8, ray->surf->d_col, ray));
 	}
 	else if (ray->t < FAR && ray->depth < MAX_DEPTH)
 		return (diffuse_prot(ray, specs, original));

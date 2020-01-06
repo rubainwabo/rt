@@ -2,10 +2,11 @@ camera
     position(0, 0, 10)
     direction(0, 0, -1)
     field_of_view(90.0)
+    abient_light(0.1)
 
 lights
-	light(spherical)
-		origin(3, 0, 5)
+    light(spherical)
+	    origin(3, 0, 5)
 		color(1, 1, 1)
 		intensity(0.1)
 
@@ -20,3 +21,4 @@ objects
         color(0.2, 1, 0.01)
         radius(5)
         type(0)
+        texture(none)
