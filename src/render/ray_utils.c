@@ -62,8 +62,8 @@ t_vec3		pixel_to_world(float x, float y, t_rt *specs)
 		specs->view_rot = rot_from_base(specs->view_dir, base, 0);
 		specs->alpha = tan(specs->alpha / 2);
 	}
-	ray.x = ((2.0 * x) - 1.0) * specs->alpha * specs->aspect;
-	ray.y = (1.0 - (2.0 * y)) * specs->alpha;
+	ray.x = ((2.0 * x) - 1.0) * specs->alpha;
+	ray.y = (1.0 - (2.0 * y)) * specs->alpha / specs->aspect;
 	ray.z = -1.0;
 	ray = normalise(ray);
 	ray = vector_matrix_multiply(ray, specs->view_rot);

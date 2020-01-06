@@ -26,7 +26,7 @@ int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 		refracted_ray(ray, &refr);
 		cast_ray(&refr, specs, original);
 		fresnel_blend(&refl, &refr, ray);
-		return (colour_mask(0.8, ray->surf->d_col, ray));
+		return (colour_mask(1, ray->surf->d_col, ray));
 	}
 	else if (ray->t < FAR && ray->surf->type == 2 && ray->depth < MAX_DEPTH)
 	{
@@ -37,7 +37,7 @@ int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 	}
 	else if (ray->t < FAR && ray->depth < MAX_DEPTH)
 		return (diffuse_prot(ray, specs, original));
-	ray->colour = vec3_init(0, 0, 0);
+	ray->colour = apply_texture(specs, ray->direct);
 	return (1);
 }
 
@@ -57,7 +57,7 @@ void		spawn_ray(int x, int y, t_rt *specs)
 	if (ray.nohit == 0)
 		shading(&ray, specs, x, y);
 	else
-		shading_far(specs, x, y);
+		shading_far(specs, ray, x, y);
 }
 
 void		*pixel_loop(void *data)

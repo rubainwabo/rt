@@ -100,6 +100,6 @@ t_surf		*set_surface(t_rt *specs)
 	output->s_exp = 20;
 	output->s_k = 0.4;
 	output->s_col = vec3_init(1, 1, 1);
-	output->ior = 1.33;
+	output->ior = 1.5;
 	return (output);
 }

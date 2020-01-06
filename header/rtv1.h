@@ -18,7 +18,7 @@
 # include <pthread.h>
 # include "../includes/minilibx_macos/mlx.h"
 # include "../includes/libft/libft.h"
-# define THREAD_COUNT 8
+# define THREAD_COUNT 1
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
@@ -37,6 +37,17 @@
 # define RED 0xff0000
 # define FAIL -100
 
+typedef struct		s_image
+{
+	void			*ptr;
+	char			*data;
+	int				bpp;
+	int				sizeline;
+	int				endian;
+	int				height;
+	int				width;
+}					t_image;
+
 typedef struct		s_surf
 {
 	t_vec3			d_col;
@@ -46,6 +57,7 @@ typedef struct		s_surf
 	float			s_k;
 	float			ior;
 	int				type;
+	t_image			*texture;
 }					t_surf;
 
 typedef struct		s_ray
@@ -68,17 +80,6 @@ typedef struct		s_obj
 	int				id;
 	struct s_obj	*next;
 }					t_obj;
-
-typedef struct		s_image
-{
-	void			*ptr;
-	char			*data;
-	int				bpp;
-	int				sizeline;
-	int				endian;
-	int				height;
-	int				width;
-}					t_image;
 
 typedef struct		s_rt
 {
@@ -108,6 +109,7 @@ typedef struct		s_rt
 	char			*str;
 	void			*cache;
 	int				cache_id;
+	int				skyboxi;
 }					t_rt;
 
 typedef struct		s_thread
@@ -214,6 +216,7 @@ t_surf				*set_surface(t_rt *specs);
 void				free_surface(int id, void *ptr);
 void				parse_lights_s(int *i, t_rt *specs);
 void				parse_lights_d(int *i, t_rt *specs);
+t_image				parse_texture(char *tex_str, t_surf *output);
 
 /*
 ** RENDERING
@@ -250,7 +253,10 @@ int					init_rt_struct(int fd, t_rt *new, char **av);
 int					colour_mask(float att, t_vec3 col, t_ray *ray);
 int					diffuse_prot(t_ray *ray, t_rt *specs, t_ray *original);
 void				shading(t_ray *ray, t_rt *specs, int x, int y);
-void				shading_far(t_rt *specs, int x, int y);
+void				shading_far(t_rt *specs, t_ray ray, int x, int y);
 t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
-
+void				init_texture(t_rt *specs);
+t_image				*create_image(t_rt *specs, char *path);
+t_vec3				plane_texturing(t_plane *p, t_ray *ray);
+t_vec3				sphere_texturing(t_sphere *s, t_ray *ray);
 #endif

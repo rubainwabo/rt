@@ -34,7 +34,7 @@ int		plane_intersect(t_rt *spec, t_ray *ray, void *hit_object)
 	double	t;
 	t_plane	*p;
 
-	(void)spec;
+	(void)(spec);
 	p = (t_plane *)hit_object;
 	oc = vec3_add(ray->origin, p->point, '-');
 	if (vec3_dot(ray->direct, p->normal) == 0)
@@ -46,7 +46,9 @@ int		plane_intersect(t_rt *spec, t_ray *ray, void *hit_object)
 		ray->t = t;
 		ray->surf = p->surf;
 		intersection_vec3(ray);
+	//	ft_memcpy((void *)&text_col, (void *)&p->surf->texture.data[ray->hitpoint.x % p->surf->texture->width + (ray->hitpoint.y % p->surf->texture->height) * p->surf->texture->width], 4);
 		ray->hitnormal = p->normal;
+		ray->surf->d_col = plane_texturing(p, ray);
 		normal_towards_cam(ray);
 		return (1);
 	}

@@ -85,6 +85,8 @@ int			init_rt_struct(int fd, t_rt *new, char **av)
 	new->cache = NULL;
 	new->cache_id = -1;
 	new->event = 0;
+	new->skyboxi = 0;
+	init_texture(new);
 	if (!(file_to_array(fd, new, av)))
 	{
 		mlx_destroy_window(new->mlx, new->win);

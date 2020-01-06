@@ -16,6 +16,7 @@ t_image		*create_image(t_rt *specs, char *path)
 {
 	t_image		*img;
 
+	printf("loading texture %s\n", path);
 	if (!(img = (t_image *)ft_memalloc(sizeof(t_image))))
     {
         ft_putendl_fd("failed to create the image pointer", 2);
@@ -34,12 +35,24 @@ t_image		*create_image(t_rt *specs, char *path)
 
 void		init_texture(t_rt *specs)
 {
-	specs->textures[0] = create_image(specs, "textures/posx.xpm");
-	specs->textures[1] = create_image(specs, "textures/negx.xpm");
-	specs->textures[2] = create_image(specs, "textures/posy.xpm");
-	specs->textures[3] = create_image(specs, "textures/negy.xpm");
-	specs->textures[4] = create_image(specs, "textures/posz.xpm");
-	specs->textures[5] = create_image(specs, "textures/negz.xpm");
+	if (specs->skyboxi == 0)
+	{
+		specs->textures[0] = create_image(specs, "textures/Lakeside/posx.xpm");
+		specs->textures[1] = create_image(specs, "textures/Lakeside/negx.xpm");
+		specs->textures[2] = create_image(specs, "textures/Lakeside/posy.xpm");
+		specs->textures[3] = create_image(specs, "textures/Lakeside/negy.xpm");
+		specs->textures[4] = create_image(specs, "textures/Lakeside/posz.xpm");
+		specs->textures[5] = create_image(specs, "textures/Lakeside/negz.xpm");
+	}
+	else if (specs->skyboxi == 1)
+	{
+		specs->textures[0] = create_image(specs, "textures/LakeHigh/posx.xpm");
+		specs->textures[1] = create_image(specs, "textures/LakeHigh/negx.xpm");
+		specs->textures[2] = create_image(specs, "textures/LakeHigh/posy.xpm");
+		specs->textures[3] = create_image(specs, "textures/LakeHigh/negy.xpm");
+		specs->textures[4] = create_image(specs, "textures/LakeHigh/posz.xpm");
+		specs->textures[5] = create_image(specs, "textures/LakeHigh/negz.xpm");
+	}
 }
 
 /*
@@ -78,22 +91,29 @@ int			draw_image(t_rt *specs)
 		return (0);
 	//init_texture(specs);
 	launch_threads(specs, THREAD_COUNT);
-	if (specs->event == 1)
-		apply_sepia(specs);
+//	if (specs->event == 1)
+//		apply_sepia(specs);
 	mlx_put_image_to_window(specs->mlx, specs->win, specs->img, 0, 0);
 	return (1);
 }
 
 int			deal_key(int key, t_rt *specs)
 {
+	printf("keycode = %d\n", key);
 	if (key == 0)
 	{
-		specs->event = !specs->event;
-		draw_image(specs);
+	//	specs->event = !specs->event;
+		apply_sepia(specs);
+		mlx_put_image_to_window(specs->mlx, specs->win, specs->img, 0, 0);
 	}
 	if (key == LEFT)
 	{
 		specs->camera.x -= 0.25;
+		draw_image(specs);
+	}
+	if (key == RIGHT)
+	{
+		specs->camera.x += 0.25;
 		draw_image(specs);
 	}
 	if (key == UP)
@@ -104,6 +124,12 @@ int			deal_key(int key, t_rt *specs)
 	if (key == DOWN)
 	{
 		specs->camera.y -= 0.25;
+		draw_image(specs);
+	}
+	if (key == 17)//press t to swap textures
+	{
+		specs->skyboxi = (specs->skyboxi + 1) % 2;
+		init_texture(specs);
 		draw_image(specs);
 	}
 	if (key == 53)

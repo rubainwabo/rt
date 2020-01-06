@@ -26,26 +26,33 @@ void		reflected_ray(t_ray *ray, t_ray *refl)
 	refl->direct = reflect(ray->hitnormal, ray->direct);
 }
 
+/*
+** Formula for refraction is Ref_dir = ηI+(ηc1−c2)N
+** n1n2 = η. Precomputed for time saving
+** c1 = cosi. Also precomputed
+** c2 = sqrt(1 − (n1n2)^2 * sin^2(θ1))
+*/
+
 void		refracted_ray(t_ray *ray, t_ray *refr)
 {
-	float		n1n2;
-	float		cosi;
+	double		n1n2;
+	double		cosi;
 
 	n1n2 = ray->ior / ray->surf->ior;
 	cosi = vec3_dot(ray->direct, ray->hitnormal);
-	cosi = cosi < 0 ? -cosi : cosi;
+	cosi = (cosi < 0) ? -cosi : cosi;
 	refr->origin = ray->hitpoint;
 	refr->depth = ray->depth + 1;
 	refr->direct = vec3_add(vec3_scale(ray->direct, n1n2, '*'),
-	vec3_scale(ray->hitnormal, (n1n2 * cosi - pow(1 - (n1n2 * n1n2)
-				* (1 - cosi * cosi), 0.5)), '*'), '+');
+	vec3_scale(ray->hitnormal, (n1n2 * cosi - pow(1 - ((n1n2 * n1n2)
+				* (1 - cosi * cosi)), 0.5)), '*'), '+');
 	refr->direct = normalise(refr->direct);
 	refr->ior = ray->surf->ior;
 }
 
 void		fresnel_blend(t_ray *refl, t_ray *refr, t_ray *ray)
 {
-	float		n[9];
+	double		n[9];
 
 	n[0] = vec3_dot(ray->direct, ray->hitnormal);
 	n[1] = ray->ior;

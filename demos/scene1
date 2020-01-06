@@ -1,6 +1,6 @@
 camera
 	position(0, 0, 10)
-	direction(0.3, 0, -1)
+	direction(0.3, 0, 1)
 	field_of_view(90.0)
 
 lights
