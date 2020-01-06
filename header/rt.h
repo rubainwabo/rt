@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 16:45:14 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 18:42:12 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "../includes/minilibx_macos/mlx.h"
 # include "../includes/libft/libft.h"
 # include "key.h"
-# define THREAD_COUNT 64
+# define THREAD_COUNT 1
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
@@ -35,31 +35,6 @@
 # define GREEN 0x00ff00
 # define RED 0xff0000
 # define FAIL -100
-
-typedef struct		s_surf
-{
-	t_vec3			d_col;
-	float			d_k;
-	t_vec3			s_col;
-	int				s_exp;
-	float			s_k;
-	float			ior;
-	int				type;
-}					t_surf;
-
-typedef struct		s_ray
-{
-	t_vec3			origin;
-	t_vec3			direct;
-	t_vec3			colour;
-	double			t;
-	t_vec3			hitpoint;
-	t_vec3			hitnormal;
-	t_surf			*surf;
-	int				depth;
-	float			ior;
-	int				nohit;
-}					t_ray;
 
 typedef struct		s_obj
 {
@@ -78,6 +53,32 @@ typedef struct		s_image
 	int				height;
 	int				width;
 }					t_image;
+
+typedef struct		s_surf
+{
+	t_vec3			d_col;
+	float			d_k;
+	t_vec3			s_col;
+	int				s_exp;
+	float			s_k;
+	float			ior;
+	int				type;
+	t_image			*texture;
+}					t_surf;
+
+typedef struct		s_ray
+{
+	t_vec3			origin;
+	t_vec3			direct;
+	t_vec3			colour;
+	double			t;
+	t_vec3			hitpoint;
+	t_vec3			hitnormal;
+	t_surf			*surf;
+	int				depth;
+	float			ior;
+	int				nohit;
+}					t_ray;
 
 typedef struct		s_rt
 {
@@ -261,7 +262,7 @@ int					init_rt_struct(int fd, t_rt *new, char **av);
 int					colour_mask(float att, t_vec3 col, t_ray *ray);
 int					diffuse_prot(t_ray *ray, t_rt *specs, t_ray *original);
 void				shading(t_ray *ray, t_rt *specs, int x, int y);
-void				shading_far(t_rt *specs, int x, int y);
+void				shading_far(t_rt *specs, t_ray ray, int x, int y);
 t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
 int					move_cam(int button, int x, int y, t_rt *specs);
 void				create_img_backgrd(t_rt *specs);
@@ -302,5 +303,12 @@ void				sub2_sampling(t_rt *specs);
 */
 
 void				reverse_chan(t_rt *specs);
+
+/*
+** textures
+*/
+
+t_vec3				plane_texturing(t_plane *p, t_ray *ray);
+t_vec3				sphere_texturing(t_sphere *s, t_ray *ray);
 
 #endif

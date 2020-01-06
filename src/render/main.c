@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 14:19:15 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/19 21:20:55 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 18:47:08 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		spawn_ray(int x, int y, t_rt *specs)
 	if (ray.nohit == 0)
 		shading(&ray, specs, x, y);
 	else
-		shading_far(specs, x, y);
+		shading_far(specs, ray, x, y);
 }
 
 void		*pixel_loop(void *data)

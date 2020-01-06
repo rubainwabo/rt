@@ -6,14 +6,15 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:18:25 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/18 12:49:29 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 18:47:56 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		shading_far(t_rt *specs, int x, int y)
+void		shading_far(t_rt *specs, t_ray ray, int x, int y)
 {
+	(void) ray;
 	specs->img->data[(y * specs->w_img + x) * 4] = specs->far_col & 0xff;
 	specs->img->data[(y * specs->w_img + x) * 4 + 1] =
 			(specs->far_col >> 8) & 0xff;
