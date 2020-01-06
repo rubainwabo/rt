@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 14:01:31 by rkamegne          #+#    #+#             */
+/*   Updated: 2020/01/06 16:54:30 by rkamegne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 static void	alloc_data(t_rt *specs, t_image *img)
@@ -7,7 +19,7 @@ static void	alloc_data(t_rt *specs, t_image *img)
 	{
 		free(img);
 		free(img->ptr);
-		exit_protocol(specs, -1, "failed to created the img string");
+		exit_protocol2(specs, -1, "failed to created the img string");
 	}
 }
 
@@ -16,7 +28,7 @@ t_image		*create_image(t_rt *specs, char *path, int x, int y)
 	t_image		*img;
 
 	if (!(img = (t_image *)ft_memalloc(sizeof(t_image))))
-		exit_protocol(specs, -1, "img struct malloc failed");
+		exit_protocol2(specs, -1, "img struct malloc failed");
 	if (!path)
 		img->ptr = mlx_new_image(specs->mlx, x, y);
 	else
@@ -25,7 +37,7 @@ t_image		*create_image(t_rt *specs, char *path, int x, int y)
 	if (!img->ptr)
 	{
 		free(img);
-		exit_protocol(specs, -1, "failed to created the img pointer");
+		exit_protocol2(specs, -1, "failed to created the img pointer");
 	}
 	alloc_data(specs, img);
 	return (img);
@@ -43,16 +55,25 @@ void		init_texture(t_rt *specs)
 
 void	draw_image(t_rt *specs)
 {
-	draw_backgrd(specs);
-	if (specs->event == NO_EVENT)
-		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
+	static int	first;
+
+	if (first++ == 0)
+		create_img_backgrd(specs);
+	mlx_put_image_to_window(specs->mlx, specs->win, specs->ui->ptr, 0, 0);
+	if (specs->event == 0)
+	{
+		mlx_string_put(specs->mlx, specs->win, 100, 500, WHITE, "LOADING...");
+		mlx_do_sync(specs->mlx);
+	}
 	else
 		possible_events(specs);
 	sub2_image(specs);
-	if (specs->event == NO_EVENT)
+	mlx_do_sync(specs->mlx);
+	if (specs->event == 0)
 	{
    		destroy_img(specs, specs->img_s);
 		sub_image(specs);
+		mlx_do_sync(specs->mlx);
    		destroy_img(specs, specs->img_s);
 		native_image(specs);
 		possible_events2(specs);

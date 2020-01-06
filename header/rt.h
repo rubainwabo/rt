@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
+/*   Updated: 2020/01/06 16:45:14 by rkamegne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
@@ -5,17 +16,17 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
-# include "../includes/minilibx/mlx.h"
+# include "../includes/minilibx_macos/mlx.h"
 # include "../includes/libft/libft.h"
 # include "key.h"
 # define THREAD_COUNT 64
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
-# define WIDTH 1200
-# define HEIGHT 800
-# define W_IMG 900
-# define H_IMG 800
+# define WIDTH 1800
+# define HEIGHT 1200
+# define W_IMG 1500
+# define H_IMG 1200
 # define POS_X 300
 # define POS_Y 0
 # define BLACK 0x0
@@ -98,6 +109,7 @@ typedef struct		s_rt
 	void			*cache;
 	int				cache_id;
 	int				first;
+	int				aliasing;
 }					t_rt;
 
 typedef struct		s_thread
@@ -252,9 +264,10 @@ void				shading(t_ray *ray, t_rt *specs, int x, int y);
 void				shading_far(t_rt *specs, int x, int y);
 t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
 int					move_cam(int button, int x, int y, t_rt *specs);
-void				draw_backgrd(t_rt *specs);
+void				create_img_backgrd(t_rt *specs);
 void				possible_events(t_rt *specs);
 void				possible_events2(t_rt *specs);
+void				possible_events3(t_rt *specs);
 void				save_file(t_rt *specs);
 void				rot_from_base2(double a, t_vec3 *u, t_mat3 *o);
 
@@ -262,24 +275,32 @@ void				rot_from_base2(double a, t_vec3 *u, t_mat3 *o);
 ** filters
 */
 
-void		apply_grayscale(t_rt *specs);
-void		apply_sepia(t_rt *specs);
-void		apply_blue(t_rt *specs);
-void		apply_purple(t_rt *specs);
+void				apply_grayscale(t_rt *specs);
+void				apply_sepia(t_rt *specs);
+void				apply_blue(t_rt *specs);
+void				apply_purple(t_rt *specs);
 
 /*
-** sampling
+** sampling_image
 */
 
-void		super_image(t_rt *specs);
-void		sub_image(t_rt *specs);
-void		sub2_image(t_rt *specs);
-void		native_image(t_rt *specs);
+void				super_image(t_rt *specs);
+void				sub_image(t_rt *specs);
+void				sub2_image(t_rt *specs);
+void				native_image(t_rt *specs);
+
+/*
+** sampling_computation
+*/
+
+void				super_sampling(t_rt *specs);
+void				sub_sampling(t_rt *specs);
+void				sub2_sampling(t_rt *specs);
 
 /*
 ** features
 */
 
-void		reverse_chan(t_rt *specs);
+void				reverse_chan(t_rt *specs);
 
 #endif

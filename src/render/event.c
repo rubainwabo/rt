@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 13:05:20 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/19 23:00:05 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 15:56:13 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,51 +14,55 @@
 
 void	deal_key_mov(int key, t_rt *specs)
 {
-	if (key == K_AR_R)
+	if (key == RIGHT)
 	{
 		specs->camera.x -= 1.25;
+		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}
-	if (key == K_AR_L)
+	if (key == LEFT)
 	{
 		specs->camera.x += 1.25;
+		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}
-	if (key == K_AR_U)
+	if (key == UP)
 	{
 		specs->camera.y -= 1.25;
+		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}
-	if (key == K_AR_D)
+	if (key == DOWN)
 	{
 		specs->camera.y += 1.25;
+		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}
 }
 
 void	deal_key_filter(int key, t_rt *specs)
 {
-	if (key == K_A)
+	if (key == A)
 	{
 		apply_grayscale(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img_s->ptr, POS_X, POS_Y);
 	}
-	if (key == K_D)
+	if (key == D)
 	{
 		apply_sepia(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img_s->ptr, POS_X, POS_Y);
 	}
-	if (key == K_F)
+	if (key == F)
 	{
 		apply_blue(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img_s->ptr, POS_X, POS_Y);
 	}
-	if (key == K_G)
+	if (key == G)
 	{
 		reverse_chan(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img_s->ptr, POS_X, POS_Y);
 	}
-	if (key == K_H)
+	if (key == H)
 	{
 		apply_purple(specs);
 		mlx_put_image_to_window(specs->mlx, specs->win, specs->img_s->ptr, POS_X, POS_Y);
@@ -67,25 +71,25 @@ void	deal_key_filter(int key, t_rt *specs)
 
 int			deal_key(int key, t_rt *specs)
 {
-	if (specs->event == EVENT)
+	if (specs->event == 1)
 		deal_key_mov(key, specs);
-	if (key == K_SP)
+	if (key == SPACE)
 	{
 		specs->event = !specs->event;
+		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}
-	if (key == K_S)
+	if (key == S)
 		save_file(specs);
-	if (key == K_L)
+	if (key == L && specs->aliasing == 1)
 	{
-		draw_backgrd(specs);
-		mlx_string_put(specs->mlx, specs->win, 100, 300, WHITE, "LOADING...");
    		destroy_img(specs, specs->img_s);
 		super_image(specs);
-		possible_events2(specs);
-		specs->event = NO_EVENT;
+		possible_events3(specs);
+		specs->event = 0;
+		specs->aliasing = 0;
 	}
-	if (key == K_ESC)
+	if (key == ESC)
 		exit_protocol2(specs, 19, "exit with code 0");
 	deal_key_filter(key, specs);	
 	return (0);
@@ -96,7 +100,7 @@ int 	move_cam(int button, int x, int y, t_rt *specs)
 	float		xm;
 	float		ym;
 
-	if (button == M_CLK_L && specs->event == EVENT)
+	if (button == LEFTCLICK && specs->event == 1)
 	{
 		specs->first = 0;
 		if (x - POS_X < 0)
@@ -108,6 +112,7 @@ int 	move_cam(int button, int x, int y, t_rt *specs)
 		specs->view_dir.z = -1.0;
 		specs->view_dir = normalise(specs->view_dir);
 		specs->view_dir = vector_matrix_multiply(specs->view_dir, specs->view_rot);
+		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}
 	return (0);

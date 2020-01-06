@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:58:30 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/09 17:16:00 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 14:18:01 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void		parse(t_rt *specs)
 		parse_lights(&i, specs);
 		parse_objects(&i, specs);
 	}
+	specs->aliasing = 1;
 	i = -1;
 	while (++i < specs->nb_line)
 		free(specs->input[i]);

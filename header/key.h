@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:07:13 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/19 20:46:11 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/06 14:25:28 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,76 +14,63 @@
 # define KEY_LINUX_H
 
 /*
-** Keyboard LETTERS
+** Keyboard
 */
 
-# define K_A 97
-# define K_B 98
-# define K_C 99
-# define K_D 100
-# define K_E 101
-# define K_F 102
-# define K_G 103
-# define K_H 104
-# define K_I 105
-# define K_J 106
-# define K_K 107
-# define K_L 108
-# define K_M 109
-# define K_N 110
-# define K_O 111
-# define K_P 112
-# define K_Q 113
-# define K_R 114
-# define K_S 115
-# define K_T 116
-# define K_U 117
-# define K_V 118
-# define K_W 119
-# define K_X 120
-# define K_Y 121
-# define K_Z 122
+# define NUM1		18
+# define NUM2		19
+# define NUM3		20
+# define NUM4		21
+# define NUM5		23
+# define NUM6		22
+# define NUM7		26
+# define NUM8		28
+# define NUM9		25
+# define NUM0		29
 
-/*
-** Keyboard ARROWS
-*/
+# define A			0
+# define B			11
+# define C			8
+# define D			2
+# define E			14
+# define F			3
+# define G			5
+# define H			4
+# define I			34
+# define J			38
+# define K			40
+# define L			37
+# define M			46
+# define N			45
+# define O			31
+# define P			35
+# define Q			12
+# define R			15
+# define S			1
+# define T			17
+# define U			32
+# define V			9
+# define W			13
+# define X			7
+# define Y			16
+# define Z			6
 
-# define K_AR_L 65361
-# define K_AR_R 65363
-# define K_AR_U 65362
-# define K_AR_D 65364
+# define ESC		53
 
-/*
-** Keyboard NUMPAD
-*/
+# define LEFT		123
+# define RIGHT		124
+# define DOWN		125
+# define UP			126
+# define ENTER		36
+# define COMMAND	55
+# define OPTION		58
+# define CONTROL	59
+# define FN			63
+# define SPACE		49
 
-# define K_NP_DIV 65455
-# define K_NP_MUL 65450
-# define K_NP_MIN 65453
-# define K_NP_PLU 65451
-
-/*
-** Keyboard MISC
-*/
-
-# define K_SP 32
-# define K_ESC 65307
-
-/*
-** Mouse
-*/
-
-# define M_CLK_L 1
-# define M_CLK_R 3
-# define M_CLK_M 2
-# define M_SCR_U 4
-# define M_SCR_D 5
-
-/*
-** Events
-*/
-
-# define NO_EVENT 0
-# define EVENT 1
+# define LEFTCLICK	1
+# define RIGHTCLICK	2
+# define SCROLLUP	4
+# define SCROLLDOWN	5
 
 # endif
