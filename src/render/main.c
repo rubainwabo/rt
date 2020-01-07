@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 14:19:15 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/07 15:21:10 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 22:18:54 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 	}
 	else if (ray->t < FAR && ray->depth < MAX_DEPTH)
 		return (diffuse_prot(ray, specs, original));
-	ray->colour = vec3_init(0, 0, 0);
+	ray->colour = (ray->depth == MAX_DEPTH) ? vec3_init(0, 0, 0) : 
+								apply_texture(specs, ray->direct);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 17:46:50 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/07 14:29:59 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 21:22:56 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	lighting_distant(t_ray *ray, t_rt *specs, t_ray *shadow_ray, t_obj *l)
 	{
 		diffuse_light(ray->surf->d_k * ft_max(vec3_dot(ray->hitnormal,
 					shadow_ray->direct), 0)
-					* light->intensity, light->color, ray->surf->d_col, ray);
+					* light->intensity, light->color, ray->texcol, ray);
 		if ((spdot = vec3_dot(ray->direct,
 		reflect(ray->hitnormal, shadow_ray->direct))) > 0.7)
 			specular_light(ray->surf->s_k * pow(spdot, ray->surf->s_exp) *
@@ -64,7 +64,7 @@ void	lighting_spherical(t_ray *ray, t_rt *specs, t_ray *shadow_ray, t_obj *l)
 	{
 		diffuse_light(ray->surf->d_k * ft_max(vec3_dot(ray->hitnormal,
 			shadow_ray->direct), 0) * light->intensity / (dist * dist),
-			light->color, ray->surf->d_col, ray);
+			light->color, ray->texcol, ray);
 		if ((spdot = vec3_dot(ray->direct, reflect(ray->hitnormal,
 		shadow_ray->direct))) > 0.7)
 			specular_light(ray->surf->s_k * pow(spdot, ray->surf->s_exp)
@@ -80,9 +80,9 @@ void	lighting(t_ray *ray, t_rt *specs)
 
 	l = specs->light_list;
 	shadow_ray.origin = ray->hitpoint;
-	ray->colour = vec3_init(specs->abient_l * ray->surf->d_col.x,
-							specs->abient_l * ray->surf->d_col.y,
-							specs->abient_l * ray->surf->d_col.z);
+	if (ray->surf->text == 0)
+		ray->texcol = ray->surf->d_col;
+	ray->colour = vec3_scale(ray->texcol, specs->abient_l, '*');
 	while (l)
 	{
 		if (l->id == 5)

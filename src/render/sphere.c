@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 13:10:20 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/07 20:29:04 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 21:22:46 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	sphere_inter2(t_rt *specs, t_ray *ray, t_var *v)
 		intersection_vec3(ray);
 		ray->hitnormal = normalise(vec3_add(ray->hitpoint,
 		v->s->center, '-'));
-		if (v->s->surf->text == 1)
-			ray->surf->d_col = sphere_texturing(v->s, ray);
+		if (ray->surf->text)
+			ray->texcol = sphere_texturing(v->s, ray);
 	}
 }
 

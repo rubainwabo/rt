@@ -11,7 +11,7 @@ lights
 		intensity(0.1)
 
 	light(distant)
-		direct(-1, 0, 1)
+		direct(0, 0, 1)
 	 	color(1, 1, 1)
 		intensity(1)
 

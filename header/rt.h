@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 20:59:17 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 22:31:06 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct		s_ray
 	t_vec3			origin;
 	t_vec3			direct;
 	t_vec3			colour;
+	t_vec3			texcol;
 	double			t;
 	t_vec3			hitpoint;
 	t_vec3			hitnormal;
@@ -115,6 +116,9 @@ typedef struct		s_rt
 	int				first;
 	int				aliasing;
 	int				bump;
+	int				skyboxi;
+	int				texmove[2];
+	double			texstretch;
 }					t_rt;
 
 typedef struct		s_thread
@@ -335,7 +339,7 @@ void				save_file(t_rt *specs);
 
 t_image				*create_texture_image(t_rt *specs, char *path, t_surf *surf, int p);
 void				set_texture(t_rt *specs, char *str, t_surf *surf);
-t_vec3				plane_texturing(t_plane *p, t_ray *ray);
+t_vec3				plane_texturing(t_plane *p, t_ray *ray, t_rt* specs);
 t_vec3				sphere_texturing(t_sphere *s, t_ray *ray);
 t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
 
@@ -348,5 +352,8 @@ int					deal_key(int key, t_rt *specs);
 void				possible_events_subimage(t_rt *specs);
 void				possible_events_native(t_rt *specs);
 void				possible_events_aliasing(t_rt *specs);
+void				init_texture(t_rt *specs);
+t_vec3				sphere_texturing(t_sphere *s, t_ray *ray);
+t_vec3				cylinder_texturing(t_cyl *c, t_ray *ray);
 
 #endif

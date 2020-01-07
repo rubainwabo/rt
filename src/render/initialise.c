@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:14:15 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 19:41:38 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 21:17:31 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,11 @@ int			init_rt_struct(int fd, t_rt *new, char **av)
 	new->cache_id = -1;
 	new->event = 0;
 	new->first = 0;
+	new->skyboxi = 0;
+	new->texstretch = 1;
+	new->texmove[0] = 0;
+	new->texmove[1] = 0;
+	init_texture(new);
 	if (!(file_to_array(fd, new, av)))
 	{
 		mlx_destroy_window(new->mlx, new->win);

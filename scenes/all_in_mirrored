@@ -114,7 +114,7 @@ objects
         texture(none)
 
      object(sphere)
-		origin(0, 0, 0)
+		origin(0, 1, 0)
 		color(1, 1, 1)
 		radius(1.5)
         type(1)
