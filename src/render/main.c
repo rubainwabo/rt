@@ -6,19 +6,24 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 14:19:15 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/07 22:18:54 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 23:27:22 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
+static void		cast_ray_util(t_ray *ray, t_rt *specs)
+{
+	ray->t = FAR;
+	loop_ray_over_objects(ray, specs);
+}
+
+int				cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 {
 	t_ray		refl;
 	t_ray		refr;
 
-	ray->t = FAR;
-	loop_ray_over_objects(ray, specs);
+	cast_ray_util(ray, specs);
 	if (ray->t < FAR && ray->surf->type == 1 && ray->depth < MAX_DEPTH)
 	{
 		reflected_ray(ray, &refl);
@@ -37,12 +42,12 @@ int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 	}
 	else if (ray->t < FAR && ray->depth < MAX_DEPTH)
 		return (diffuse_prot(ray, specs, original));
-	ray->colour = (ray->depth == MAX_DEPTH) ? vec3_init(0, 0, 0) : 
+	ray->colour = (ray->depth == MAX_DEPTH) ? vec3_init(0, 0, 0) :
 								apply_texture(specs, ray->direct);
 	return (1);
 }
 
-void		spawn_ray(int x, int y, t_rt *specs)
+void			spawn_ray(int x, int y, t_rt *specs)
 {
 	t_ray	ray;
 	t_surf	surf;
@@ -62,7 +67,7 @@ void		spawn_ray(int x, int y, t_rt *specs)
 		shading_far(specs, ray, x, y);
 }
 
-void		*pixel_loop(void *data)
+void			*pixel_loop(void *data)
 {
 	t_thread	*d;
 	int			x;
@@ -79,7 +84,7 @@ void		*pixel_loop(void *data)
 	return (0);
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_rt		specs;
 	int			fd;

@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 13:10:20 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/07 22:37:50 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 23:31:08 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	sphere_inter2(t_rt *specs, t_ray *ray, t_var *v)
 {
-	(void) specs;
-	
+	(void)specs;
 	if (v->t2 < v->t1 && v->t2 > NEAR)
 		v->t1 = v->t2;
 	if (v->t1 < ray->t && v->t1 > NEAR)

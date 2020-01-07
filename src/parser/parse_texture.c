@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:18:28 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 20:16:14 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 23:18:55 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void		set_texture(t_rt *specs, char *str, t_surf *surf)
 	}
 }
 
-void		destroy_texture(t_surf *surf)
+void		destroy_texture(t_image *img)
 {
-	free(surf->texture->data);
-	free(surf->texture->ptr);
-	free(surf->texture);
+	free(img->data);
+	free(img->ptr);
+	free(img);
 }

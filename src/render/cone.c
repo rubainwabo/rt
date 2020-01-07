@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 14:57:40 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/14 14:55:27 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 22:45:40 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		cone_intersect(t_rt *spec, t_ray *ray, void *hit_object)
 	double	t2;
 	t_cone	*specs;
 
-	(void) spec;
+	(void)spec;
 	specs = (t_cone *)hit_object;
 	oc = vec3_add(ray->origin, specs->center, '-');
 	abc[0] = pow(vec3_dot(ray->direct, specs->axis), 2)

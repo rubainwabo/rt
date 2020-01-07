@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 16:58:30 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/07 17:47:12 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 23:31:46 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void		parse(t_rt *specs)
 		parse_lights(&i, specs);
 		parse_objects(&i, specs);
 	}
-	// INIT_TEXTURE NEEDS TO BE HERE AND CALLED WITH EXIT_PROTOCOL P = 1
 	specs->aliasing = 1;
 	i = -1;
 	while (++i < specs->nb_line)

@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 14:57:36 by krutten           #+#    #+#             */
-/*   Updated: 2019/12/14 14:55:43 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 23:29:55 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		cylinder_intersect(t_rt *spec, t_ray *ray, void *hit_object)
 	double	t2;
 	t_cyl	*specs;
 
-	(void) spec;
+	(void)spec;
 	specs = (t_cyl *)hit_object;
 	oc = vec3_add(ray->origin, specs->center, '-');
 	abc[0] = 1 - (vec3_dot(ray->direct, specs->axis) * vec3_dot(ray->direct,

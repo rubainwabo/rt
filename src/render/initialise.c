@@ -6,13 +6,13 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:14:15 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 21:17:31 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 23:23:41 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			count_line(int fd, t_rt *specs)
+int				count_line(int fd, t_rt *specs)
 {
 	int		test;
 	int		count;
@@ -39,7 +39,7 @@ int			count_line(int fd, t_rt *specs)
 	return (count);
 }
 
-int			file_to_array(int fd, t_rt *specs, char **av)
+int				file_to_array(int fd, t_rt *specs, char **av)
 {
 	char		*line;
 	int			i;
@@ -68,7 +68,22 @@ int			file_to_array(int fd, t_rt *specs, char **av)
 	return (1);
 }
 
-int			init_rt_struct(int fd, t_rt *new, char **av)
+static void		init_rt_struct2(t_rt *new)
+{
+	new->obj_list = NULL;
+	new->light_list = NULL;
+	new->far_col = BLACK;
+	new->cache = NULL;
+	new->cache_id = -1;
+	new->event = 0;
+	new->first = 0;
+	new->skyboxi = 0;
+	new->texstretch = 1;
+	new->texmove[0] = 0;
+	new->texmove[1] = 0;
+}
+
+int				init_rt_struct(int fd, t_rt *new, char **av)
 {
 	if (!(new->mlx = mlx_init()))
 		return (ft_error("mlx_init failed"));
@@ -81,17 +96,7 @@ int			init_rt_struct(int fd, t_rt *new, char **av)
 	new->w_img = W_IMG / 2;
 	new->h_img = H_IMG / 2;
 	new->aspect = (double)W_IMG / H_IMG;
-	new->obj_list = NULL;
-	new->light_list = NULL;
-	new->far_col = BLACK;
-	new->cache = NULL;
-	new->cache_id = -1;
-	new->event = 0;
-	new->first = 0;
-	new->skyboxi = 0;
-	new->texstretch = 1;
-	new->texmove[0] = 0;
-	new->texmove[1] = 0;
+	init_rt_struct2(new);
 	init_texture(new);
 	if (!(file_to_array(fd, new, av)))
 	{

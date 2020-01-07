@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 22:37:11 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 23:47:28 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,6 @@ void				free_surf_text_sphere(t_surf *surf);
 void				free_surf_text_cyl(t_surf *surf);
 void				free_surf_text_cone(t_surf *surf);
 void				free_surf_text_plane(t_surf *surf);
-void				destroy_texture(t_surf *surf);
 
 /*
 ** RENDERING
@@ -337,11 +336,11 @@ void				save_file(t_rt *specs);
 ** textures
 */
 
-t_image				*create_texture_image(t_rt *specs, char *path, t_surf *surf, int p);
+t_image				*create_texture_image(t_rt *specs, char *path, t_surf *surf,
+																		int p);
 void				set_texture(t_rt *specs, char *str, t_surf *surf);
-t_vec3				plane_texturing(t_plane *p, t_ray *ray, t_rt* specs);
+t_vec3				plane_texturing(t_plane *p, t_ray *ray, t_rt *specs);
 t_vec3				sphere_texturing(t_sphere *s, t_ray *ray, t_rt *specs);
-t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
 
 /*
 ** events
@@ -349,10 +348,18 @@ t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
 
 int					deal_mouse(int button, int x, int y, void *param);
 int					deal_key(int key, t_rt *specs);
+void				deal_key_mov(int key, t_rt *specs);
 void				possible_events_subimage(t_rt *specs);
 void				possible_events_native(t_rt *specs);
 void				possible_events_aliasing(t_rt *specs);
-void				init_texture(t_rt *specs);
 t_vec3				cylinder_texturing(t_cyl *c, t_ray *ray);
+
+/*
+** skybox
+*/
+
+void				destroy_texture(t_image *img);
+void				init_texture(t_rt *specs);
+t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
 
 #endif
