@@ -22,7 +22,7 @@ PARSER = parse.c object_utils.c parse_objects.c manage_object.c exit_protocol.c\
 RENDER = sphere.c cone.c cylinder.c cap.c mat3_scale.c reflect.c ft_thread.c utils.c\
 		ray_utils.c main.c lighting.c event.c plane.c initialise.c colouring.c texture.c\
 		user_interface.c export.c filter.c image.c sampling.c sampling_image.c\
-		sampling_image2.c
+		sampling_image2.c skybox.c
 PATH_P = parser/
 SRC_NAME = $(addprefix $(PATH_P), $(PARSER))
 PATH_R = render/

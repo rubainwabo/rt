@@ -205,6 +205,21 @@ typedef struct		s_var
 	int				coord[17];
 }					t_var;
 
+typedef struct 		s_sb
+{
+	float			abs_coor[3];
+	int				sign_coor[3];
+	int				index;
+	int				color;
+	float			maxAxis;
+	float			uc;
+	float			vc;
+	float			u;
+	float			v;
+	int 			offset;
+}					t_sb;
+
+
 /*
 ** PARSING
 */
