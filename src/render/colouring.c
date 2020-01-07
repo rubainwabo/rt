@@ -14,12 +14,12 @@
 
 void		shading_far(t_rt *specs, t_ray ray, int x, int y)
 {
-	(void) ray;
-	specs->img->data[(y * specs->w_img + x) * 4] = specs->far_col & 0xff;
-	specs->img->data[(y * specs->w_img + x) * 4 + 1] =
-			(specs->far_col >> 8) & 0xff;
-	specs->img->data[(y * specs->w_img + x) * 4 + 2] =
-			(specs->far_col >> 16) & 0xff;
+	t_vec3	skybox;
+
+	skybox = apply_texture(specs, ray.direct);
+	specs->img->data[(y * specs->w_img + x) * 4] = (int)(skybox.z * 255.0) & 0xff;
+	specs->img->data[(y * specs->w_img + x) * 4 + 1] = (int)(skybox.y * 255.0) & 0xff;
+	specs->img->data[(y * specs->w_img + x) * 4 + 2] =(int)(skybox.x * 255.0)& 0xff;
 }
 
 void		shading(t_ray *ray, t_rt *specs, int x, int y)

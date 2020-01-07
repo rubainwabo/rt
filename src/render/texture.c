@@ -82,7 +82,7 @@ t_vec3	apply_texture(t_rt *specs, t_vec3 direct)
 //perform u, v texture lookup. This means 1 pixel per 1 square world surface. Thats likely ugly, so do 10 * 10 instead. This will mean the pattern repeat every width/10 units, and height/10 units
 //uv lookup for different objects will be a bit more complex
 
-int		uv_plane_compute(t_plane *p, t_vec3 coord, t_ray *ray)
+int		uv_plane_compute(t_plane *p, t_vec3 coord, t_ray *ray, double stretch)
 {
 	t_vec3	u_base;
 	t_vec3	v_base;
@@ -98,21 +98,23 @@ int		uv_plane_compute(t_plane *p, t_vec3 coord, t_ray *ray)
 	v_base = normalise(v_base);
 	u = vec3_dot(u_base, coord);
 	u = fabs(u);
-	u = fmod(u * 40, ray->surf->texture->width);//u is always between 0 and width, with 10 pixels per world unit
+	u = (u / 10) * stretch;
+	u = fmod(u, 1.0);//u is always between 0 and width, with 10 pixels per world unit
 	v = vec3_dot(v_base, coord);
 	v = fabs(v);
-	v = fmod(v * 40, ray->surf->texture->height);//v is always between 0 and height, with 10 pixels per world unit
-	return ((int)(u) + (int)(v) * ray->surf->texture->width);
+	v = (v / 10) * stretch;
+	v = fmod(v, 1.0);//v is always between 0 and height, with 10 pixels per world unit
+	return ((int)(u * ray->surf->texture->width) + (int)(v * ray->surf->texture->height) * ray->surf->texture->width);
 }
 
-t_vec3	plane_texturing(t_plane *p, t_ray *ray)
+t_vec3	plane_texturing(t_plane *p, t_ray *ray, t_rt *specs)
 {
 	int		offset;
 	int		color;
 	t_vec3	output;
 
 	//construct basis vectors of plane.
-	offset = uv_plane_compute(p, vec3_add(ray->hitpoint, p->point, '-'), ray);
+	offset = uv_plane_compute(p, vec3_add(ray->hitpoint, p->point, '-'), ray, specs->texstretch);
 	ft_memcpy(&color, &ray->surf->texture->data[4 * offset], 4);
 	output.x = ((color >> 16) & 0xff) / 255.0;
 	output.y = ((color >> 8) & 0xff) / 255.0;
@@ -137,12 +139,10 @@ int		uv_sphere_compute(t_vec3 coord, t_ray *ray)
 	//to normalise to u,v [0,1], perform
 	//u = (theta+ pi/2) / pi
 	//v = (phi + pi) / 2pi
-//	printf("displacement vector normalised of sphere intersects [%f,\t%f,\t%f]\n", coord.x, coord.y, coord.z);
-	theta = atan(coord.z / coord.x);
-	phi = asin(coord.y);
+	theta = atan(coord.x / coord.z);
+	phi = asin(-coord.y);
 	u = (theta + M_PI / 2.0) / M_PI;
-	v = (phi + M_PI) / (2.0 * M_PI);
-	//printf("returning offset %d\n", (int)(u) + (int)(v) * ray->surf->texture->width);
+	v = (phi + M_PI / 2.0) / (M_PI);
 	return ((int)(u * ray->surf->texture->width) + (int)(v * ray->surf->texture->height) * ray->surf->texture->width);
 }
 
@@ -160,3 +160,37 @@ t_vec3	sphere_texturing(t_sphere *s, t_ray *ray)
 	output.z = (color & 0xff) / 255.0;
 	return (output);
 }
+
+//obvious candidate is cylindrical coords, and thats what we doing lmao stretch city up in this bitch. 
+//u will be mapped to atan(x/y)
+//v will be mapped to z plain and simple
+/*int		uv_cylinder_compute(t_vec3 coord, t_ray *ray, t_cyl *c)
+{
+	double	theta;
+	double	u;
+	double	v;
+	t_vec3	normlocal;
+
+	normlocal = normalise(coord);
+	theta = atan(normlocal.x / normlocal.z);
+	u = (theta + M_PI) / (2.0 * M_PI);
+	printf("v in uv cylmap %f\n", coord.y/c->max);
+	v = coord.y / c->max;
+	if (v >= 1 || v <= -1)
+		v = 0.5;
+	return ((int)(u * ray->surf->texture->width) + (int)(v * ray->surf->texture->height) * ray->surf->texture->width);
+}
+
+t_vec3	cylinder_texturing(t_cyl *c, t_ray *ray)
+{
+	int		offset;
+	int		color;
+	t_vec3	output;
+
+	offset = uv_cylinder_compute(vec3_add(ray->hitpoint, c->center, '-'), ray, c);
+	ft_memcpy(&color, &ray->surf->texture->data[4 * offset], 4);
+	output.x = ((color >> 16) & 0xff) / 255.0;
+	output.y = ((color >> 8) & 0xff) / 255.0;
+	output.z = (color & 0xff) / 255.0;
+	return (output);
+}*/

@@ -10,7 +10,7 @@ lights
 		intensity(0.1)
 
 	light(distant)
-		direct(-1, 0, 1)
+		direct(0, 0, 1)
 	 	color(1, 1, 1)
 		intensity(1)
 
@@ -18,5 +18,5 @@ objects
     object(sphere)
         origin(0, 0, 0)
         color(0.2, 1, 0.01)
-        radius(5)
+        radius(2)
         type(0)

@@ -37,7 +37,7 @@ int			cast_ray(t_ray *ray, t_rt *specs, t_ray *original)
 	}
 	else if (ray->t < FAR && ray->depth < MAX_DEPTH)
 		return (diffuse_prot(ray, specs, original));
-	ray->colour = vec3_init(0, 0, 0);
+	ray->colour = apply_texture(specs, ray->direct);
 	return (1);
 }
 

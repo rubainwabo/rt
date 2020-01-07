@@ -78,7 +78,8 @@ int		plane_intersect(t_rt *spec, t_ray *ray, void *hit_object)
 		//we need to define a direction along which to bump map the surface
 		//for every plane except the one with normal 1, 0, 0 we can just choose 0, -nz, ny
 		//for plane with normal 1, 0, 0, choose -ny, nx, 0
-		ray->surf->d_col = plane_texturing(p, ray);
+		if (ray->surf->tex)
+			ray->texcol = plane_texturing(p, ray, spec);
 		normal_towards_cam(ray);
 		return (1);
 	}

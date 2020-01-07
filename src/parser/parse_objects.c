@@ -29,7 +29,8 @@ void	parse_sphere(int *i, t_rt *specs)
 	parse_vec_col(&s->surf->d_col, move(i, &j, specs), specs);
 	s->radius = ft_abs(ft_atof(move(i, &j, specs)));
 	s->surf->type = ft_atoi(move(i, &j, specs));
-	s->surf->texture = create_image(specs, "textures/bricktexture.xpm", 0, 0);
+	s->surf->texture = create_image(specs, "textures/globe.xpm", 0, 0);
+	s->surf->tex = 1;
 	if (!(new = new_object(s, 1)))
 		exit_protocol(specs, 0, "Can't add a sphere");
 	add_object(&specs->obj_list, new);
@@ -54,6 +55,7 @@ void	parse_cylinder(int *i, t_rt *specs)
 	c->radius = ft_abs(ft_atof(move(i, &j, specs)));
 	parse_vec_col(&c->surf->d_col, move(i, &j, specs), specs);
 	c->surf->type = ft_atoi(move(i, &j, specs));
+	c->surf->tex = 0;
 	if (!(new = new_object(c, 2)))
 		exit_protocol(specs, 0, "Can't add a cylinder");
 	add_object(&specs->obj_list, new);
@@ -77,6 +79,7 @@ void	parse_plane(int *i, t_rt *specs)
 	parse_vec_col(&p->surf->d_col, move(i, &j, specs), specs);
 	p->surf->type = ft_atoi(move(i, &j, specs));
 	p->surf->texture = create_image(specs, "textures/bricktexture.xpm", 0, 0);
+	p->surf->tex = 1;
 	if (!(new = new_object(p, 0)))
 		exit_protocol(specs, 0, "Can't add a plane");
 	add_object(&specs->obj_list, new);
@@ -104,6 +107,7 @@ void	parse_cone(int *i, t_rt *specs)
 	c->angle = (c->angle / 2) * (M_PI / 180);
 	parse_vec_col(&c->surf->d_col, move(i, &j, specs), specs);
 	c->surf->type = ft_atoi(move(i, &j, specs));
+	c->surf->tex = 0;
 	if (!(new = new_object(c, 3)))
 		exit_protocol(specs, 0, "Can't add a cone");
 	add_object(&specs->obj_list, new);

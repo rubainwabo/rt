@@ -37,7 +37,8 @@ t_image		*create_image(t_rt *specs, char *path, int x, int y)
 	if (!img->ptr)
 	{
 		free(img);
-		exit_protocol2(specs, -1, "failed to created the img pointer");
+//		exit_protocol2(specs, -1, "failed to created the img pointer");
+		exit(1);
 	}
 	alloc_data(specs, img);
 	return (img);
@@ -45,12 +46,24 @@ t_image		*create_image(t_rt *specs, char *path, int x, int y)
 
 void		init_texture(t_rt *specs)
 {
-	specs->textures[0] = create_image(specs, "textures/posx.xpm", 0, 0);
-	specs->textures[1] = create_image(specs, "textures/negx.xpm", 0, 0);
-	specs->textures[2] = create_image(specs, "textures/posy.xpm", 0, 0);
-	specs->textures[3] = create_image(specs, "textures/negy.xpm", 0, 0);
-	specs->textures[4] = create_image(specs, "textures/posz.xpm", 0, 0);
-	specs->textures[5] = create_image(specs, "textures/negz.xpm", 0, 0);
+	if (specs->skyboxi == 0)
+	{
+		specs->textures[0] = create_image(specs, "textures/LakeSide/posx.xpm", 0, 0);
+		specs->textures[1] = create_image(specs, "textures/LakeSide/negx.xpm", 0, 0);
+		specs->textures[2] = create_image(specs, "textures/LakeSide/posy.xpm", 0, 0);
+		specs->textures[3] = create_image(specs, "textures/LakeSide/negy.xpm", 0, 0);
+		specs->textures[4] = create_image(specs, "textures/LakeSide/posz.xpm", 0, 0);
+		specs->textures[5] = create_image(specs, "textures/LakeSide/negz.xpm", 0, 0);
+	}
+	else if (specs->skyboxi == 1)
+	{
+		specs->textures[0] = create_image(specs, "textures/LakeHigh/posx.xpm", 0, 0);
+		specs->textures[1] = create_image(specs, "textures/LakeHigh/negx.xpm", 0, 0);
+		specs->textures[2] = create_image(specs, "textures/LakeHigh/posy.xpm", 0, 0);
+		specs->textures[3] = create_image(specs, "textures/LakeHigh/negy.xpm", 0, 0);
+		specs->textures[4] = create_image(specs, "textures/LakeHigh/posz.xpm", 0, 0);
+		specs->textures[5] = create_image(specs, "textures/LakeHigh/negz.xpm", 0, 0);
+	}
 }
 
 void	draw_image(t_rt *specs)

@@ -25,7 +25,8 @@ void	sphere_inter2(t_rt *specs, t_ray *ray, t_var *v)
 		intersection_vec3(ray);
 		ray->hitnormal = normalise(vec3_add(ray->hitpoint,
 		v->s->center, '-'));
-		ray->surf->d_col = sphere_texturing(v->s, ray);
+		if (ray->surf->tex)
+			ray->texcol = sphere_texturing(v->s, ray);
 	}
 }
 
