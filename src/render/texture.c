@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:54:16 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 21:50:46 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 22:39:16 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ t_vec3	plane_texturing(t_plane *p, t_ray *ray, t_rt *specs)
 	return (output);
 }
 
-int		uv_sphere_compute(t_vec3 coord, t_ray *ray)
+int		uv_sphere_compute(t_vec3 coord, t_ray *ray, double umove, double vmove)
 {
 	double	theta;
 	double	phi;
@@ -141,19 +141,26 @@ int		uv_sphere_compute(t_vec3 coord, t_ray *ray)
 	//v = (phi + pi) / 2pi
 	theta = atan(coord.x / coord.z);
 	phi = asin(-coord.y);
-	u = (theta + M_PI / 2.0) / M_PI;
+	u = (theta + M_PI) / (2 * M_PI);
+	u = fmod(u + (umove / 20), 1.0);
 	v = (phi + M_PI / 2.0) / (M_PI);
+	v = fmod(v + (vmove / 20), 1.0);
+	printf("u %f, v %f, umove %f, vmove %f\n", u, v, umove, vmove);
+	u = fabs(u);
+	v = fabs(v);
+	if (v > 0.9999)
+		return (0);
 	return ((int)(u * ray->surf->texture->width) + (int)(v * ray->surf->texture->height) * ray->surf->texture->width);
 }
 
-t_vec3	sphere_texturing(t_sphere *s, t_ray *ray)
+t_vec3	sphere_texturing(t_sphere *s, t_ray *ray, t_rt *specs)
 {
 	int		offset;
 	int		color;
 	t_vec3	output;
 
 	//spherical theta phi coords of sphere intersected converted to u, v and subsequently to the lookup index in the texture array
-	offset = uv_sphere_compute(normalise(vec3_add(ray->hitpoint, s->center, '-')), ray);
+	offset = uv_sphere_compute(normalise(vec3_add(ray->hitpoint, s->center, '-')), ray, specs->texmove[0], specs->texmove[1]);
 	ft_memcpy(&color, &ray->surf->texture->data[4 * offset], 4);
 	output.x = ((color >> 16) & 0xff) / 255.0;
 	output.y = ((color >> 8) & 0xff) / 255.0;

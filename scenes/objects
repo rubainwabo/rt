@@ -45,5 +45,5 @@ objects
         normal(1, 0, 0)
         color(0, 0, 1)
 		type(0)
-		texture(none)
+		texture(brick)
 		bump(0)
