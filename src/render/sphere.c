@@ -26,7 +26,7 @@ void	sphere_inter2(t_rt *specs, t_ray *ray, t_var *v)
 		ray->hitnormal = normalise(vec3_add(ray->hitpoint,
 		v->s->center, '-'));
 		if (ray->surf->tex)
-			ray->texcol = sphere_texturing(v->s, ray);
+			ray->texcol = sphere_texturing(v->s, ray, specs);
 	}
 }
 

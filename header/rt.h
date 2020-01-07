@@ -114,7 +114,7 @@ typedef struct		s_rt
 	int				first;
 	int				aliasing;
 	int				skyboxi;
-	int				texmove[2];
+	double			texmove[2];
 	double			texstretch;
 }					t_rt;
 
@@ -315,7 +315,7 @@ void				reverse_chan(t_rt *specs);
 
 void				init_texture(t_rt *specs);
 t_vec3				plane_texturing(t_plane *p, t_ray *ray, t_rt* specs);
-t_vec3				sphere_texturing(t_sphere *s, t_ray *ray);
+t_vec3				sphere_texturing(t_sphere *s, t_ray *ray, t_rt *specs);
 t_vec3				cylinder_texturing(t_cyl *c, t_ray *ray);
 
 #endif
