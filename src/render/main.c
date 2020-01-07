@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 14:19:15 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/06 21:21:18 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 15:21:10 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void		spawn_ray(int x, int y, t_rt *specs)
 
 	ray.surf = &surf;
 	ray.origin = specs->camera;
-	ray.direct = pixel_to_world((float)x / specs->w_img, (float)y / specs->h_img, specs);
+	ray.direct = pixel_to_world((float)x / specs->w_img, (float)y
+										/ specs->h_img, specs);
 	ray.depth = 0;
 	ray.ior = 1.0;
 	ray.nohit = 0;

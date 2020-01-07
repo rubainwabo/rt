@@ -4,7 +4,7 @@ camera
 	field_of_view(90.0)
 	abient_light(0.1)
 
-light
+lights
 	light(spherical)
 		origin(0, 2, 0)
 		color(1, 1, 0)

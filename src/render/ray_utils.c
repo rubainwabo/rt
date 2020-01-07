@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 19:00:21 by rkamegne          #+#    #+#             */
-/*   Updated: 2019/12/17 22:32:04 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 15:21:36 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,10 @@ t_vec3		pixel_to_world(float x, float y, t_rt *specs)
 {
 	t_vec3		ray;
 	t_vec3		base;
-	//static int	first = 0;
 
 	base = vec3_init(0, 0, -1);
 	if (specs->first++ == 0)
-	{
 		specs->view_rot = rot_from_base(specs->view_dir, base, 0);
-		//specs->alpha = tan(specs->alpha / 2);
-	}
 	ray.x = ((2.0 * x) - 1.0) * specs->alpha * specs->aspect;
 	ray.y = (1.0 - (2.0 * y)) * specs->alpha;
 	ray.z = -1.0;

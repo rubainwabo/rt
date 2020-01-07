@@ -28,6 +28,7 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
+		texture(none)
 
   object(cylinder)
 		origin(3, -4, 3)
@@ -36,6 +37,7 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
+		texture(none)
 
   object(cylinder)
 		origin(-3, -4, -3)
@@ -44,6 +46,7 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
+		texture(none)
 
   object(cylinder)
 		origin(3, -4, -3)
@@ -52,3 +55,4 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
+		texture(none)

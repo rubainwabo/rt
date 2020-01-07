@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/07 15:15:07 by rkamegne          #+#    #+#             */
+/*   Updated: 2020/01/07 15:16:05 by rkamegne         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 
 static char		*putnum(char *name)
@@ -68,10 +80,10 @@ static void		set_title(FILE *fp)
 	free(tmp);
 }
 
-void		fill_file(t_rt *specs, FILE *fp)
+void			fill_file(t_rt *specs, FILE *fp)
 {
-	unsigned char color[3];
-	int		i;
+	unsigned char	color[3];
+	int				i;
 
 	i = 0;
 	set_title(fp);
@@ -85,7 +97,7 @@ void		fill_file(t_rt *specs, FILE *fp)
 	}
 }
 
-void		save_file(t_rt *specs)
+void			save_file(t_rt *specs)
 {
 	FILE	*fp;
 	char	*name;

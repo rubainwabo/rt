@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 20:34:59 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 21:40:13 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 18:36:57 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,35 @@
 ** THESE FUCTIONS FREE THE SURFACE AND THE TEXTURE
 */
 
-void	free_surf_text_sphere(t_rt *specs, t_surf *surf)
+void	free_surf_text_sphere(t_surf *surf)
 {
 	if (surf->text == 1)
-		destroy_img(specs, surf->texture);
+		destroy_texture(surf);
 	free(surf);
 }
 
-void	free_surf_text_cyl(t_rt *specs, t_surf *surf)
+void	free_surf_text_cyl(t_surf *surf)
 {
 	if (surf->text == 1)
-		destroy_img(specs, surf->texture);
+		destroy_texture(surf);
 	free(surf);
 }
 
-void	free_surf_text_cone(t_rt *specs, t_surf *surf)
+void	free_surf_text_cone(t_surf *surf)
 {
 	if (surf->text == 1)
-		destroy_img(specs, surf->texture);
+		destroy_texture(surf);
 	free(surf);
 }
 
-void	free_surf_text_plane(t_rt *specs, t_surf *surf)
+void	free_surf_text_plane(t_surf *surf)
 {
 	if (surf->text == 1)
-		destroy_img(specs, surf->texture);
+		destroy_texture(surf);
 	free(surf);
 }
 
-void		free_surface(int id, void *ptr)
+void	free_surface(int id, void *ptr)
 {
 	t_var	norm;
 

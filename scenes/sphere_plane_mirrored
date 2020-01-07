@@ -78,7 +78,7 @@ objects
 		color(1, 1, 0)
 		radius(1.5)
 		type(0)
-		texture(none)
+		texture(wood)
 
   object(sphere)
 		origin(0, 0, 0)

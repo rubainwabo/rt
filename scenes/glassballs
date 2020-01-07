@@ -39,7 +39,7 @@ objects
 
      object(sphere)
 		origin(5, -2, 0)
-		color(1, 0.6, 0.6)
+		color(1, 1, 1)
 		radius(2)
         type(1)
 		texture(none)

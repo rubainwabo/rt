@@ -6,7 +6,7 @@
 #    By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/16 16:11:42 by krutten           #+#    #+#              #
-#    Updated: 2020/01/06 21:33:44 by rkamegne         ###   ########.fr        #
+#    Updated: 2020/01/07 15:33:21 by rkamegne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ MLX = $(addprefix $(MLX_PATH), libmlx.a)
 LIBFT_PATH = includes/libft/
 LIBFT = $(addprefix $(LIBFT_PATH), libft.a)
 
+SRC_LIBFT = $(wildcard $(LIBFT_PATH)/*.c)
+
 FRAMEWORKS = -framework OpenGl -framework Appkit
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -53,7 +55,7 @@ all: $(MLX) $(LIBFT) $(NAME)
 $(MLX):
 	@make -C $(MLX_PATH)
 
-$(LIBFT):
+$(LIBFT): $(SRC_LIBFT)
 	@make -C $(LIBFT_PATH)
 
 $(NAME): $(OBJ)

@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:33:18 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 20:44:51 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 19:58:08 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	free_array(char **array, int index, t_rt *specs, char *line)
 /*
 ** p == 0 -> free surface and cache of the last created object
 ** p == 2 -> free only the cache
-** p == 19 -> exit when escape is pressed
+** p == 19 -> exit when escape is pressed in exit_protocol2
+** p != 19 -> free the input->array
 */
 
 void	exit_protocol(t_rt *specs, int p, char *err)
@@ -44,9 +45,12 @@ void	exit_protocol(t_rt *specs, int p, char *err)
 		free(specs->cache);
 	free_all_lists(specs);
 	i = -1;
-	while (++i < specs->nb_line)
-		free(specs->input[i]);
-	free(specs->input);
+	if (p != 19)
+	{
+		while (++i < specs->nb_line)
+			free(specs->input[i]);
+		free(specs->input);
+	}
 	exit(EXIT_FAILURE);
 }
 
@@ -57,8 +61,8 @@ void	exit_protocol2(t_rt *specs, int p, char *err)
 	else
 		ft_putendl_fd(err, 2);
 	free_all_lists(specs);
-   	destroy_img(specs, specs->img_s);
-   	destroy_img(specs, specs->ui);
+	destroy_img(specs, specs->img_s);
+	destroy_img(specs, specs->ui);
 	mlx_destroy_window(specs->mlx, specs->win);
 	if (p == 19)
 		exit(EXIT_SUCCESS);

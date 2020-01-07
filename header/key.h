@@ -6,12 +6,12 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 19:07:13 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 14:25:28 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 15:44:47 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef KEY_LINUX_H
-# define KEY_LINUX_H
+#ifndef KEY_H
+# define KEY_H
 
 /*
 ** Keyboard
@@ -73,4 +73,4 @@
 # define SCROLLUP	4
 # define SCROLLDOWN	5
 
-# endif
+#endif

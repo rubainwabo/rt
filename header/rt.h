@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 21:37:24 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 20:59:17 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include "../includes/minilibx_macos/mlx.h"
 # include "../includes/libft/libft.h"
 # include "key.h"
-# define THREAD_COUNT 1
+# define THREAD_COUNT 64
 # define FAR 1000000
 # define NEAR 0.0002
 # define MAX_DEPTH 10
 # define WIDTH 1800
-# define HEIGHT 1200
+# define HEIGHT 1300
 # define W_IMG 1500
-# define H_IMG 1200
+# define H_IMG 1300
 # define POS_X 300
 # define POS_Y 0
 # define BLACK 0x0
@@ -65,6 +65,7 @@ typedef struct		s_surf
 	int				type;
 	t_image			*texture;
 	int				text;
+	int				text_status;
 }					t_surf;
 
 typedef struct		s_ray
@@ -229,10 +230,11 @@ void				parse_cylinder(int *i, t_rt *specs);
 ** FREE_SURF_TEXTURE
 */
 
-void				free_surf_text_sphere(t_rt *specs, t_surf *surf);
-void				free_surf_text_cyl(t_rt *specs, t_surf *surf);
-void				free_surf_text_cone(t_rt *specs, t_surf *surf);
-void				free_surf_text_plane(t_rt *specs, t_surf *surf);
+void				free_surf_text_sphere(t_surf *surf);
+void				free_surf_text_cyl(t_surf *surf);
+void				free_surf_text_cone(t_surf *surf);
+void				free_surf_text_plane(t_surf *surf);
+void				destroy_texture(t_surf *surf);
 
 /*
 ** RENDERING
@@ -242,49 +244,55 @@ void				free_surf_text_plane(t_rt *specs, t_surf *surf);
 ** image
 */
 
-t_image				*create_image(t_rt *specs, char *path, int x, int y);
+t_image				*create_image(t_rt *specs, int lvl, int x, int y);
 void				destroy_img(t_rt *specs, t_image *img);
 void				draw_image(t_rt *specs);
+
+/*
+** ray construction
+*/
+
+t_mat3				rot_from_base(t_vec3 view, t_vec3 base, int wrong);
+void				rot_from_base2(double a, t_vec3 *u, t_mat3 *o);
+t_vec3				normalise(t_vec3 v1);
+t_vec3				pixel_to_world(float x, float y, t_rt *specs);
+void				normal_towards_cam(t_ray *ray);
+void				*pixel_loop(void *data);
+t_mat3				mat3_scale(t_mat3 a, double c);
+void				launch_threads(t_rt *specs, int n);
+int					init_rt_struct(int fd, t_rt *new, char **av);
+
+/*
+** intersection routine
+*/
 
 int					sphere_intersect(t_rt *specs, t_ray *ray, void *hit_object);
 int					plane_intersect(t_rt *specs, t_ray *ray, void *hit_object);
 int					cone_intersect(t_rt *specs, t_ray *ray, void *hit_object);
-int					deal_mouse(int button, int x, int y, void *param);
-int					deal_key(int key, t_rt *specs);
-int					cylinder_intersect(t_rt *specs, t_ray *ray, void *hit_object);
-t_mat3				rot_from_base(t_vec3 view, t_vec3 base, int wrong);
-t_vec3				normalise(t_vec3 v1);
-void				loop_ray_over_objects(t_ray *ray, t_rt *specs);
-void				loop_shadow_ray_over_objects(t_ray *ray, t_rt *specs);
-void				lighting(t_ray *ray, t_rt *specs);
+int					cylinder_intersect(t_rt *specs, t_ray *ray,
+															void *hit_object);
 void				intersection_vec3(t_ray *ray);
-t_vec3				pixel_to_world(float x, float y, t_rt *specs);
 int					cap_intersect_top(t_ray *ray, t_cyl *specs);
 int					cap_intersect_bot(t_ray *ray, t_cyl *specs);
 int					cone_cap_intersect_bot(t_ray *ray, t_cone *specs);
 int					cone_cap_intersect_top(t_ray *ray, t_cone *specs);
-void				normal_towards_cam(t_ray *ray);
-void				*pixel_loop(void *data);
+void				loop_ray_over_objects(t_ray *ray, t_rt *specs);
+void				loop_shadow_ray_over_objects(t_ray *ray, t_rt *specs);
 int					solve_polynom_2(double *abc, double *t1, double *t2);
-t_mat3				mat3_scale(t_mat3 a, double c);
+
+/*
+** lightning routine
+*/
+
 t_vec3				reflect(t_vec3 norm, t_vec3 inci);
 void				reflected_ray(t_ray *ray, t_ray *refl);
 void				refracted_ray(t_ray *ray, t_ray *refr);
-void				launch_threads(t_rt *specs, int n);
+void				lighting(t_ray *ray, t_rt *specs);
 void				fresnel_blend(t_ray *refl, t_ray *refr, t_ray *ray);
-int					init_rt_struct(int fd, t_rt *new, char **av);
-int					colour_mask(float att, t_vec3 col, t_ray *ray);
-int					diffuse_prot(t_ray *ray, t_rt *specs, t_ray *original);
 void				shading(t_ray *ray, t_rt *specs, int x, int y);
 void				shading_far(t_rt *specs, t_ray ray, int x, int y);
-t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
-int					move_cam(int button, int x, int y, t_rt *specs);
-void				create_img_backgrd(t_rt *specs);
-void				possible_events(t_rt *specs);
-void				possible_events2(t_rt *specs);
-void				possible_events3(t_rt *specs);
-void				save_file(t_rt *specs);
-void				rot_from_base2(double a, t_vec3 *u, t_mat3 *o);
+int					colour_mask(float att, t_vec3 col, t_ray *ray);
+int					diffuse_prot(t_ray *ray, t_rt *specs, t_ray *original);
 
 /*
 ** filters
@@ -293,7 +301,7 @@ void				rot_from_base2(double a, t_vec3 *u, t_mat3 *o);
 void				apply_grayscale(t_rt *specs);
 void				apply_sepia(t_rt *specs);
 void				apply_blue(t_rt *specs);
-void				apply_purple(t_rt *specs);
+void				apply_red(t_rt *specs);
 
 /*
 ** sampling_image
@@ -317,13 +325,28 @@ void				sub2_sampling(t_rt *specs);
 */
 
 void				reverse_chan(t_rt *specs);
+int					move_cam(int button, int x, int y, t_rt *specs);
+void				create_img_backgrd(t_rt *specs);
+void				save_file(t_rt *specs);
 
 /*
 ** textures
 */
 
+t_image				*create_texture_image(t_rt *specs, char *path, t_surf *surf, int p);
 void				set_texture(t_rt *specs, char *str, t_surf *surf);
 t_vec3				plane_texturing(t_plane *p, t_ray *ray);
 t_vec3				sphere_texturing(t_sphere *s, t_ray *ray);
+t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
+
+/*
+** events
+*/
+
+int					deal_mouse(int button, int x, int y, void *param);
+int					deal_key(int key, t_rt *specs);
+void				possible_events_subimage(t_rt *specs);
+void				possible_events_native(t_rt *specs);
+void				possible_events_aliasing(t_rt *specs);
 
 #endif

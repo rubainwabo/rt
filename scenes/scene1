@@ -24,6 +24,7 @@ objects
         angle(90)
         color(0.1, 1, 0.5)
 		type(0)
+		texture(none)
 
 	object(sphere)
 		origin(0, 0, 0)
@@ -45,4 +46,4 @@ objects
         color(0, 0, 1)
 		type(0)
 		texture(none)
-		bump(1)
+		bump(0)

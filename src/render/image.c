@@ -6,54 +6,80 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:31 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 20:52:38 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 20:39:41 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	alloc_data(t_image *img)
+/*
+** create_image with 1 destroys the ui allocated only
+**                   2 destroys the first string allocated and the ui
+** 19 because the input->array is already freed in parse
+*/
+
+static void		call_right_protocol(t_rt *specs, int lvl)
+{
+	if (lvl == 0)
+		exit_protocol(specs, 19, "Can't create the background image");
+	else if (lvl == 1)
+	{
+		destroy_img(specs, specs->ui);
+		exit_protocol(specs, 19, "Can't create the first sample image");
+	}
+	else if (lvl == 2)
+	{
+		destroy_img(specs, specs->img);
+		destroy_img(specs, specs->ui);
+		exit_protocol(specs, 19, "Can't create the second sample image");
+	}
+}
+
+static void		alloc_data(t_rt *specs, int lvl, t_image *img)
 {
 	if (!(img->data = mlx_get_data_addr(img->ptr, &img->bpp,
 		&img->sizeline, &img->endian)))
 	{
 		free(img);
 		free(img->ptr);
-		exit(1);
+		call_right_protocol(specs, lvl);
 	}
 }
 
-t_image		*create_image(t_rt *specs, char *path, int x, int y)
+/*
+** lvl is where an error occurs
+*/
+
+t_image			*create_image(t_rt *specs, int lvl, int x, int y)
 {
 	t_image		*img;
 
 	if (!(img = (t_image *)ft_memalloc(sizeof(t_image))))
-		exit(1);
-	if (!path)
-		img->ptr = mlx_new_image(specs->mlx, x, y);
-	else
-		img->ptr = mlx_xpm_file_to_image(specs->mlx, path,
-		&img->width, &img->height);
-	if (!img->ptr)
+		call_right_protocol(specs, lvl);
+	if (!(img->ptr = mlx_new_image(specs->mlx, x, y)))
 	{
 		free(img);
-		exit(1);			
+		call_right_protocol(specs, lvl);
 	}
-	alloc_data(img);
+	alloc_data(specs, lvl, img);
 	return (img);
 }
 
-void		init_texture(t_rt *specs)
-{
-	specs->textures[0] = create_image(specs, "textures/posx.xpm", 0, 0);
-	specs->textures[1] = create_image(specs, "textures/negx.xpm", 0, 0);
-	specs->textures[2] = create_image(specs, "textures/posy.xpm", 0, 0);
-	specs->textures[3] = create_image(specs, "textures/negy.xpm", 0, 0);
-	specs->textures[4] = create_image(specs, "textures/posz.xpm", 0, 0);
-	specs->textures[5] = create_image(specs, "textures/negz.xpm", 0, 0);
-}
+/*
+** this function needs to be done after the parsing
+*/
 
-void	draw_image(t_rt *specs)
+// void		init_texture(t_rt *specs)
+// {
+// 	specs->textures[0] = create_texture_image(specs, "textures/posx.xpm", 1);
+// 	specs->textures[1] = create_texture_image(specs, "textures/negx.xpm", 1);
+// 	specs->textures[2] = create_texture_image(specs, "textures/posy.xpm", 1);
+// 	specs->textures[3] = create_texture_image(specs, "textures/negy.xpm", 1);
+// 	specs->textures[4] = create_texture_image(specs, "textures/posz.xpm", 1);
+// 	specs->textures[5] = create_texture_image(specs, "textures/negz.xpm", 1);
+// }
+
+void			draw_image(t_rt *specs)
 {
 	static int	first;
 
@@ -66,21 +92,21 @@ void	draw_image(t_rt *specs)
 		mlx_do_sync(specs->mlx);
 	}
 	else
-		possible_events(specs);
+		possible_events_subimage(specs);
 	sub2_image(specs);
 	mlx_do_sync(specs->mlx);
 	if (specs->event == 0)
 	{
-   		destroy_img(specs, specs->img_s);
+		destroy_img(specs, specs->img_s);
 		sub_image(specs);
 		mlx_do_sync(specs->mlx);
-   		destroy_img(specs, specs->img_s);
+		destroy_img(specs, specs->img_s);
 		native_image(specs);
-		possible_events2(specs);
+		possible_events_native(specs);
 	}
 }
 
-void		destroy_img(t_rt *specs, t_image *img)
+void			destroy_img(t_rt *specs, t_image *img)
 {
 	mlx_destroy_image(specs->mlx, img->ptr);
 	free(img);

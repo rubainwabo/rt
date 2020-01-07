@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 15:12:55 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/06 21:40:08 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/07 19:55:30 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,29 @@ void		add_object(t_obj **list, t_obj *new)
 	}
 }
 
-void		free_surface_texture(t_rt *specs, int id, void *ptr)
+void		free_surface_texture(int id, void *ptr)
 {
 	t_var	norm;
 
 	if (id == 1)
 	{
 		norm.sphere = (t_sphere *)ptr;
-		free_surf_text_sphere(specs, norm.sphere->surf);
+		free_surf_text_sphere(norm.sphere->surf);
 	}
 	if (id == 2)
 	{
 		norm.cyl = (t_cyl *)ptr;
-		free_surf_text_cyl(specs, norm.cyl->surf);
+		free_surf_text_cyl(norm.cyl->surf);
 	}
 	if (id == 0)
 	{
 		norm.plane = (t_plane *)ptr;
-		free_surf_text_plane(specs, norm.plane->surf);
+		free_surf_text_plane(norm.plane->surf);
 	}
 	if (id == 3)
 	{
 		norm.cone = (t_cone *)ptr;
-		free_surf_text_cone(specs, norm.cone->surf);
+		free_surf_text_cone(norm.cone->surf);
 	}
 }
 
@@ -72,7 +72,7 @@ void		free_all_lists(t_rt *specs)
 	temp = specs->obj_list;
 	while (temp)
 	{
-		free_surface_texture(specs, temp->id, temp->obj);
+		free_surface_texture(temp->id, temp->obj);
 		free(temp->obj);
 		next = temp->next;
 		free(temp);
