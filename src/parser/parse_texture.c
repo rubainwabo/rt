@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:18:28 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 23:18:55 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 00:58:57 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ void		set_texture(t_rt *specs, char *str, t_surf *surf)
 		surf->texture = create_texture_image(specs,
 									"textures/wood.xpm", surf, 2);
 	}
+	else if (!ft_strncmp(str, "globe", 5))
+	{
+		surf->text = 1;
+		surf->texture = create_texture_image(specs,
+									"textures/globe.xpm", surf, 2);
+	}
 }
 
 void		destroy_texture(t_image *img)
@@ -74,4 +80,5 @@ void		destroy_texture(t_image *img)
 	free(img->data);
 	free(img->ptr);
 	free(img);
+	img = NULL;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   skybox.c                                           :+:      :+:    :+:   */
+/*   init_texture_skybox.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 22:53:44 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 23:35:04 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 00:56:38 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static void			init_texture2(t_rt *specs)
 
 void				init_texture(t_rt *specs)
 {
+
 	if (specs->skyboxi == 0)
 	{
 		specs->textures[0] = create_texture_skybox(specs,

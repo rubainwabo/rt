@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 23:47:28 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 00:56:37 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,21 @@ typedef struct		s_var
 	int				pix[4];
 	int				coord[17];
 }					t_var;
+
+typedef struct 		s_sb
+{
+	float			abs_coor[3];
+	int				sign_coor[3];
+	int				index;
+	int				color;
+	float			maxAxis;
+	float			uc;
+	float			vc;
+	float			u;
+	float			v;
+	int 			offset;
+}					t_sb;
+
 
 /*
 ** PARSING
