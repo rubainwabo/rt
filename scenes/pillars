@@ -42,7 +42,7 @@ objects
 
   object(sphere)
 		origin(0, 0, 0)
-		color(1, 1, 1)
+		color(0.5, 0.5, 0.5)
 		radius(2)
 		type(2)
 		texture(none)
@@ -54,7 +54,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		texture(none)
 
   object(cylinder)
 		origin(3, -4, 3)
@@ -63,7 +62,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		texture(none)
 	
   object(cylinder)
 		origin(-3, -4, -3)
@@ -72,7 +70,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		texture(none)
 	
   object(cylinder)
 		origin(3, -4, -3)
@@ -81,7 +78,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		texture(none)
 	
 	object(cone)
 		center(0, 0, 0)
@@ -91,4 +87,3 @@ objects
 		angle(30)
 		color(1, 0, 1)
 		type(0)
-		texture(none)

@@ -58,7 +58,6 @@ objects
 			angle(90)
 			color(1, 0, 0)
 			type(0)
-			texture(none)
 		
 	object(cone)
 			center(-5, 5, 0)
@@ -68,7 +67,6 @@ objects
 			angle(90)
 			color(1, 0, 0)
 			type(0)
-			texture(none)
 
 	object(cone)
 			center(0, 5, 0)        
@@ -78,7 +76,6 @@ objects
 			angle(90)
 			color(1, 0, 0)
 			type(0)
-			texture(none)
 
 	object(cylinder)
 			origin(-5, 2, 0)
@@ -87,7 +84,6 @@ objects
 			radius(0.5)
 			color(1, 0, 0)
 			type(0)
-			texture(none)
 
 	object(cylinder)
 			origin(5, 2, 0)
@@ -96,4 +92,3 @@ objects
 			radius(0.5)
 			color(1, 0, 0)
 			type(0)
-			texture(none)

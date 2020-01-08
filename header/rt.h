@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 14:34:00 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 16:09:28 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define BLUE 0x0000ff
 # define GREEN 0x00ff00
 # define RED 0xff0000
+# define YELLOW 0xffff00
 # define FAIL -100
 
 typedef struct		s_obj
@@ -110,7 +111,6 @@ typedef struct		s_rt
 	int				(*fct_ptr[4])(struct s_rt *specs, t_ray *, void *);
 	int				x;
 	int				y;
-	int				far_col;
 	int				nb_line;
 	char			*str;
 	void			*cache;
@@ -369,6 +369,7 @@ void				possible_events_subimage(t_rt *specs);
 void				possible_events_native(t_rt *specs);
 void				possible_events_aliasing(t_rt *specs);
 t_vec3				cylinder_texturing(t_cyl *c, t_ray *ray);
+void				turn_on_off_textures(t_rt *specs);
 
 /*
 ** skybox

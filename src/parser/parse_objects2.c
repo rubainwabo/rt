@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 21:25:58 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 15:09:41 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 16:19:19 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void		parse_cone2(t_obj *new, int *i, t_cone *c, t_rt *specs)
 
 	parse_vec_col(&c->surf->d_col, move(i, &j, specs), specs);
 	c->surf->type = ft_atoi(move(i, &j, specs));
-	set_texture(specs, move(i, &j, specs), c->surf);
 	if (!(new = new_object(c, 3)))
 		exit_protocol(specs, 0, "Can't add a cone");
 	add_object(&specs->obj_list, new);
@@ -53,7 +52,6 @@ static void		parse_cylinder2(t_obj *new, int *i, t_cyl *c, t_rt *specs)
 
 	parse_vec_col(&c->surf->d_col, move(i, &j, specs), specs);
 	c->surf->type = ft_atoi(move(i, &j, specs));
-	set_texture(specs, move(i, &j, specs), c->surf);
 	if (!(new = new_object(c, 2)))
 		exit_protocol(specs, 0, "Can't add a cylinder");
 	add_object(&specs->obj_list, new);

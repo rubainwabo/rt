@@ -19,4 +19,3 @@ objects
 		angle(90.0)
 		color(1, 0, 1)
 		type(0)
-		texture(none)

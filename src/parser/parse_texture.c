@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 19:18:28 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 00:58:57 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 16:15:48 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,19 @@ t_image		*create_texture_image(t_rt *specs, char *path, t_surf *surf, int p)
 
 void		set_texture(t_rt *specs, char *str, t_surf *surf)
 {
-	if (!ft_strncmp(str, "brick", 5))
+	if (!ft_strncmp(str, "brick)", 6))
 	{
 		surf->text = 1;
 		surf->texture = create_texture_image(specs,
 									"textures/bricktexture.xpm", surf, 2);
 	}
-	else if (!ft_strncmp(str, "lake", 4))
-	{
-		surf->text = 1;
-		surf->texture = create_texture_image(specs,
-									"textures/bricktexture.xpm", surf, 2);
-	}
-	else if (!ft_strncmp(str, "wood", 4))
+	else if (!ft_strncmp(str, "wood)", 5))
 	{
 		surf->text = 1;
 		surf->texture = create_texture_image(specs,
 									"textures/wood.xpm", surf, 2);
 	}
-	else if (!ft_strncmp(str, "globe", 5))
+	else if (!ft_strncmp(str, "globe)", 6))
 	{
 		surf->text = 1;
 		surf->texture = create_texture_image(specs,

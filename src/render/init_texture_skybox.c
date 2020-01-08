@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 22:53:44 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 14:32:01 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 16:07:08 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_image		*create_texture_skybox(t_rt *specs, char *path, int p)
 		ft_putendl_fd("failed to init skybox textures", 2);
 		exit(1);
 	}
-	if (!path || !(img->ptr = mlx_xpm_file_to_image(specs->mlx, path,
+	if (!(img->ptr = mlx_xpm_file_to_image(specs->mlx, path,
 		&img->width, &img->height)))
 	{
 		free(img);

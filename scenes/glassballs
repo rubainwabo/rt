@@ -65,4 +65,3 @@ objects
 		radius(0.2)
 		color(1, 1, 1)
         type(0)
-		texture(none)

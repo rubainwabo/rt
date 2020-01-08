@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 14:29:57 by krutten           #+#    #+#             */
-/*   Updated: 2020/01/07 23:44:54 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:59:34 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ int				plane_intersect(t_rt *spec, t_ray *ray, void *hit_object)
 		ray->surf = p->surf;
 		intersection_vec3(ray);
 		ray->hitnormal = p->normal;
+		normal_towards_cam(ray);
 		oc = vec3_init(0, -ray->hitnormal.z, ray->hitnormal.y);
 		if (vec3_dot(ray->hitnormal, vec3_init(1, 0, 0)) > 0.999)
 			oc = vec3_init(-ray->hitnormal.y, ray->hitnormal.x, 0);
 		plane_intersect2(spec, ray, p, oc);
-		normal_towards_cam(ray);
 		return (1);
 	}
 	return (0);

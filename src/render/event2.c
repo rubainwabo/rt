@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 22:47:27 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 22:51:18 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 17:11:40 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	deal_key_mov3(int key, t_rt *specs)
 		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}
+	if (key == NUM2)
+	{
+		specs->camera.z += 1.25;
+		destroy_img(specs, specs->img_s);
+		draw_image(specs);
+	}
 }
 
 void	deal_key_mov2(int key, t_rt *specs)
@@ -51,6 +57,12 @@ void	deal_key_mov2(int key, t_rt *specs)
 	if (key == B)
 	{
 		specs->texmove[0] += 1;
+		destroy_img(specs, specs->img_s);
+		draw_image(specs);
+	}
+	if (key == NUM8)
+	{
+		specs->camera.z -= 1.25;
 		destroy_img(specs, specs->img_s);
 		draw_image(specs);
 	}

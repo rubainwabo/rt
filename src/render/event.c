@@ -6,40 +6,11 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 13:05:20 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 14:12:07 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 16:29:59 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void	turn_on_off_textures(t_rt *specs)
-{
-	t_plane		*p;
-	t_sphere	*s;
-	t_obj		*list;
-
-	list = specs->obj_list;
-	while (list)
-	{
-		if (list->id == 0)
-		{
-			p = (t_plane *)list->obj;
-			if (p->surf->text && p->surf->text_status)
-				p->surf->text = 0;
-			else if (!p->surf->text && p->surf->text_status)
-				p->surf->text = 1;
-		}
-		if (list->id == 1)
-		{
-			s = (t_sphere *)list->obj;
-			if (s->surf->text && s->surf->text_status)
-				s->surf->text = 0;
-			else if (!s->surf->text && s->surf->text_status)
-				s->surf->text = 1;
-		}
-		list = list->next;
-	}
-}
 
 void	deal_key_filter2(int key, t_rt *specs)
 {

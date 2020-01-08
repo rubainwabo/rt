@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:14:15 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 14:18:13 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 16:01:36 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int				count_line(int fd, t_rt *specs)
 		if (test == -1)
 		{
 			mlx_destroy_window(specs->mlx, specs->win);
+			ft_putstr_fd("Can't read\n", 2);
 			exit(1);
 		}
 		count++;
@@ -72,7 +73,6 @@ static void		init_rt_struct2(t_rt *new)
 {
 	new->obj_list = NULL;
 	new->light_list = NULL;
-	new->far_col = BLACK;
 	new->cache = NULL;
 	new->cache_id = -1;
 	new->event = 0;

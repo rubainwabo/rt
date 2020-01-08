@@ -59,7 +59,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		tetxure(none)
 	
 	object(cylinder)
 		origin(3, -4, 3)
@@ -68,7 +67,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		texture(none)
 	
 	object(cylinder)
 		origin(-3, -4, -3)
@@ -77,7 +75,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		texture(none)
 	
 	object(cylinder)
 		origin(3, -4, -3)
@@ -86,7 +83,6 @@ objects
 		radius(1.5)
 		color(1, 1, 0)
 		type(0)
-		texture(none)
 	
 	object(cone)
 		center(0, 0, 0)
@@ -96,4 +92,3 @@ objects
 		angle(30)
 		color(1, 0, 1)
 		type(0)
-		texture(none)

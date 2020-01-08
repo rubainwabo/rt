@@ -1,1 +1,1 @@
-./rt scenes/all_in && ./rt scenes/all_in_mirrored && ./rt scenes/bumptest && ./rt scenes/cone && ./rt scenes/glassballs && ./rt scenes/objects && ./rt scenes/pillars && ./rt scenes/scene1 && ./rt scenes/sphere_light && ./rt scenes/sphere_plane_mirrored && ./rt scenes/spots && ./rt scenes/two_spheres
+./rt scenes/all_in && ./rt scenes/bumptest && ./rt scenes/cone && ./rt scenes/objects && ./rt scenes/pillars && ./rt scenes/scene1 && ./rt scenes/sphere_light && ./rt scenes/sphere_plane_mirrored && ./rt scenes/spots && ./rt scenes/two_spheres
