@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 22:53:44 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 00:56:38 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:32:01 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 void				free_texture_arr(t_rt *specs, int p)
 {
-	int		i;
-
-	i = -1;
-	while (++i < p)
-		destroy_texture(specs->textures[i]);
+	if (p < 6)
+	{
+		while (--p >= 0)
+			destroy_img(specs, specs->lake_s[p]);
+	}
+	else
+	{
+		while (--p >= 6)
+			destroy_img(specs, specs->lake_h[p - 6]);
+		p++;
+		while (--p >= 0)
+			destroy_img(specs, specs->lake_s[p]);
+	}
 }
 
 static void			alloc_data_sky(t_rt *specs, t_image *img, int p)
@@ -64,40 +72,35 @@ static t_image		*create_texture_skybox(t_rt *specs, char *path, int p)
 	return (img);
 }
 
-static void			init_texture2(t_rt *specs)
+static void			init_texture(t_rt *specs)
 {
-	specs->textures[0] = create_texture_skybox(specs,
-					"textures/LakeHigh/posx.xpm", 0);
-	specs->textures[1] = create_texture_skybox(specs,
-					"textures/LakeHigh/negx.xpm", 1);
-	specs->textures[2] = create_texture_skybox(specs,
-					"textures/LakeHigh/posy.xpm", 2);
-	specs->textures[3] = create_texture_skybox(specs,
-					"textures/LakeHigh/negy.xpm", 3);
-	specs->textures[4] = create_texture_skybox(specs,
-					"textures/LakeHigh/posz.xpm", 4);
-	specs->textures[5] = create_texture_skybox(specs,
-					"textures/LakeHigh/negz.xpm", 5);
+	specs->lake_h[0] = create_texture_skybox(specs,
+					"textures/LakeHigh/posx.xpm", 6);
+	specs->lake_h[1] = create_texture_skybox(specs,
+					"textures/LakeHigh/negx.xpm", 7);
+	specs->lake_h[2] = create_texture_skybox(specs,
+					"textures/LakeHigh/posy.xpm", 8);
+	specs->lake_h[3] = create_texture_skybox(specs,
+					"textures/LakeHigh/negy.xpm", 9);
+	specs->lake_h[4] = create_texture_skybox(specs,
+					"textures/LakeHigh/posz.xpm", 10);
+	specs->lake_h[5] = create_texture_skybox(specs,
+					"textures/LakeHigh/negz.xpm", 11);
 }
 
-void				init_texture(t_rt *specs)
+void				init_texture_skybox(t_rt *specs)
 {
-
-	if (specs->skyboxi == 0)
-	{
-		specs->textures[0] = create_texture_skybox(specs,
+	specs->lake_s[0] = create_texture_skybox(specs,
 					"textures/LakeSide/posx.xpm", 0);
-		specs->textures[1] = create_texture_skybox(specs,
+	specs->lake_s[1] = create_texture_skybox(specs,
 					"textures/LakeSide/negx.xpm", 1);
-		specs->textures[2] = create_texture_skybox(specs,
+	specs->lake_s[2] = create_texture_skybox(specs,
 					"textures/LakeSide/posy.xpm", 2);
-		specs->textures[3] = create_texture_skybox(specs,
+	specs->lake_s[3] = create_texture_skybox(specs,
 					"textures/LakeSide/negy.xpm", 3);
-		specs->textures[4] = create_texture_skybox(specs,
+	specs->lake_s[4] = create_texture_skybox(specs,
 					"textures/LakeSide/posz.xpm", 4);
-		specs->textures[5] = create_texture_skybox(specs,
+	specs->lake_s[5] = create_texture_skybox(specs,
 					"textures/LakeSide/negz.xpm", 5);
-	}
-	else if (specs->skyboxi == 1)
-		init_texture2(specs);
+	init_texture(specs);
 }

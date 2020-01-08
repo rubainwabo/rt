@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 13:05:20 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 00:55:46 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:12:07 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,16 +88,11 @@ void	deal_key_filter(int key, t_rt *specs)
 
 void	deal_key2(int key, t_rt *specs)
 {
-	int		i;
-
-	i = -1;
 	if (key == T)
 	{
 		specs->skyboxi = !specs->skyboxi;
 		destroy_img(specs, specs->img_s);
-		while (++i < 6)
-			destroy_img(specs, specs->textures[i]);
-		init_texture(specs);
+		swap_texture_skybox(specs);
 		draw_image(specs);
 	}
 	if (key == ESC)

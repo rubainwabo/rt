@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 14:01:41 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 00:56:37 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:34:00 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ typedef struct		s_rt
 	t_vec3			camera;
 	t_vec3			view_dir;
 	t_image			*textures[6];
+	t_image			*lake_s[6];
+	t_image			*lake_h[6];
 	double			fov;
 	t_mat3			view_rot;
 	double			alpha;
@@ -205,20 +207,19 @@ typedef struct		s_var
 	int				coord[17];
 }					t_var;
 
-typedef struct 		s_sb
+typedef struct		s_sb
 {
 	float			abs_coor[3];
 	int				sign_coor[3];
 	int				index;
 	int				color;
-	float			maxAxis;
+	float			max_axis;
 	float			uc;
 	float			vc;
 	float			u;
 	float			v;
-	int 			offset;
+	int				offset;
 }					t_sb;
-
 
 /*
 ** PARSING
@@ -374,7 +375,8 @@ t_vec3				cylinder_texturing(t_cyl *c, t_ray *ray);
 */
 
 void				destroy_texture(t_image *img);
-void				init_texture(t_rt *specs);
+void				init_texture_skybox(t_rt *specs);
 t_vec3				apply_texture(t_rt *specs, t_vec3 direct);
+void				swap_texture_skybox(t_rt *specs);
 
 #endif

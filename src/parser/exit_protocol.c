@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:33:18 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 00:18:06 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:14:25 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ void	exit_protocol2(t_rt *specs, int p, char *err)
 	destroy_img(specs, specs->img_s);
 	destroy_img(specs, specs->ui);
 	while (++i < 6)
-		destroy_texture(specs->textures[i]);
+		destroy_texture(specs->lake_h[i]);
+	i = -1;
+	while (++i < 6)
+		destroy_texture(specs->lake_s[i]);
 	mlx_destroy_window(specs->mlx, specs->win);
 	if (p == 19)
 		exit(EXIT_SUCCESS);

@@ -6,15 +6,28 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 18:54:16 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 00:50:57 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:33:31 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
+void	swap_texture_skybox(t_rt *specs)
+{
+	int		i;
+
+	i = -1;
+	if (specs->skyboxi == 0)
+		while (++i < 6)
+			specs->textures[i] = specs->lake_s[i];
+	else if (specs->skyboxi == 1)
+		while (++i < 6)
+			specs->textures[i] = specs->lake_h[i];
+}
+
 void	init_sb(t_sb *sb, t_vec3 direct)
 {
-	sb->maxAxis = 0;
+	sb->max_axis = 0;
 	sb->uc = 0;
 	sb->vc = 0;
 	sb->offset = 0;
@@ -31,7 +44,7 @@ void	hit_faces012(t_sb *sb, t_vec3 direct)
 	if (sb->sign_coor[0] && sb->abs_coor[0] >= sb->abs_coor[1] &&
 				sb->abs_coor[0] >= sb->abs_coor[2])
 	{
-		sb->maxAxis = sb->abs_coor[0];
+		sb->max_axis = sb->abs_coor[0];
 		sb->uc = -direct.z;
 		sb->vc = -direct.y;
 		sb->index = 0;
@@ -39,7 +52,7 @@ void	hit_faces012(t_sb *sb, t_vec3 direct)
 	if (!sb->sign_coor[0] && sb->abs_coor[0] >= sb->abs_coor[1] &&
 				sb->abs_coor[0] >= sb->abs_coor[2])
 	{
-		sb->maxAxis = sb->abs_coor[0];
+		sb->max_axis = sb->abs_coor[0];
 		sb->uc = direct.z;
 		sb->vc = -direct.y;
 		sb->index = 1;
@@ -47,7 +60,7 @@ void	hit_faces012(t_sb *sb, t_vec3 direct)
 	if (sb->sign_coor[1] && sb->abs_coor[1] >= sb->abs_coor[0] &&
 				sb->abs_coor[1] >= sb->abs_coor[2])
 	{
-		sb->maxAxis = sb->abs_coor[1];
+		sb->max_axis = sb->abs_coor[1];
 		sb->uc = direct.x;
 		sb->vc = direct.z;
 		sb->index = 2;
@@ -59,7 +72,7 @@ void	hit_faces345(t_sb *sb, t_vec3 direct)
 	if (!sb->sign_coor[1] && sb->abs_coor[1] >= sb->abs_coor[0] &&
 					sb->abs_coor[1] >= sb->abs_coor[2])
 	{
-		sb->maxAxis = sb->abs_coor[1];
+		sb->max_axis = sb->abs_coor[1];
 		sb->uc = direct.x;
 		sb->vc = direct.z;
 		sb->index = 3;
@@ -67,7 +80,7 @@ void	hit_faces345(t_sb *sb, t_vec3 direct)
 	if (sb->sign_coor[2] && sb->abs_coor[2] >= sb->abs_coor[0] &&
 					sb->abs_coor[2] >= sb->abs_coor[1])
 	{
-		sb->maxAxis = sb->abs_coor[2];
+		sb->max_axis = sb->abs_coor[2];
 		sb->uc = direct.x;
 		sb->vc = -direct.y;
 		sb->index = 4;
@@ -75,7 +88,7 @@ void	hit_faces345(t_sb *sb, t_vec3 direct)
 	if (!sb->sign_coor[2] && sb->abs_coor[2] >= sb->abs_coor[0] &&
 					sb->abs_coor[2] >= sb->abs_coor[1])
 	{
-		sb->maxAxis = sb->abs_coor[2];
+		sb->max_axis = sb->abs_coor[2];
 		sb->uc = -direct.x;
 		sb->vc = -direct.y;
 		sb->index = 5;
@@ -90,10 +103,10 @@ t_vec3	apply_texture(t_rt *specs, t_vec3 direct)
 	init_sb(&sb, direct);
 	hit_faces012(&sb, direct);
 	hit_faces345(&sb, direct);
-	sb.u = 0.5 * (sb.uc / sb.maxAxis + 1.0);
+	sb.u = 0.5 * (sb.uc / sb.max_axis + 1.0);
 	if (sb.u == 1.0)
 		sb.u -= 1.0 / specs->textures[sb.index]->width;
-	sb.v = 0.5 * (sb.vc / sb.maxAxis + 1.0);
+	sb.v = 0.5 * (sb.vc / sb.max_axis + 1.0);
 	sb.offset = (((int)(sb.u * specs->textures[sb.index]->width) + (int)(sb.v *
 		specs->textures[sb.index]->height) * specs->textures[sb.index]->width));
 	ft_memcpy((void *)&sb.color, (void *)specs->textures[sb.index]->data +

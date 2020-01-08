@@ -25,9 +25,9 @@ objects
 			point(0, -2, 1)
 			normal(0, -1, 0)
 			color(1, 1, 0.45)
-			type(0)
-			texture(none)
-			bump(0)
+			type(2)
+			texture(globe)
+			bump(1)
 
 	object(sphere)
 			origin(0, 0, 0)
@@ -48,7 +48,7 @@ objects
 			color(1, 0.11, 0.45)
 			radius(1.5)
 			type(0)
-			texture(none)
+			texture(brick)
 
 	object(cone)
 			center(5, 5, 0)

@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 19:14:15 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/08 00:56:37 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:18:13 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int				init_rt_struct(int fd, t_rt *new, char **av)
 	new->h_img = H_IMG / 2;
 	new->aspect = (double)W_IMG / H_IMG;
 	init_rt_struct2(new);
-	init_texture(new);
+	init_texture_skybox(new);
+	swap_texture_skybox(new);
 	if (!(file_to_array(fd, new, av)))
 	{
 		mlx_destroy_window(new->mlx, new->win);

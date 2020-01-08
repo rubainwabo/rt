@@ -6,7 +6,7 @@
 /*   By: rkamegne <rkamegne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 20:34:59 by rkamegne          #+#    #+#             */
-/*   Updated: 2020/01/07 23:18:47 by rkamegne         ###   ########.fr       */
+/*   Updated: 2020/01/08 14:25:27 by rkamegne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,28 @@
 
 void	free_surf_text_sphere(t_surf *surf)
 {
-	if (surf->text == 1)
+	if (surf->text_status == 1)
 		destroy_texture(surf->texture);
 	free(surf);
 }
 
 void	free_surf_text_cyl(t_surf *surf)
 {
-	if (surf->text == 1)
+	if (surf->text_status == 1)
 		destroy_texture(surf->texture);
 	free(surf);
 }
 
 void	free_surf_text_cone(t_surf *surf)
 {
-	if (surf->text == 1)
+	if (surf->text_status == 1)
 		destroy_texture(surf->texture);
 	free(surf);
 }
 
 void	free_surf_text_plane(t_surf *surf)
 {
-	if (surf->text == 1)
+	if (surf->text_status == 1)
 		destroy_texture(surf->texture);
 	free(surf);
 }
