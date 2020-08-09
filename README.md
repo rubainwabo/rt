@@ -14,3 +14,7 @@
 - Linux X11
 ### Images
 ![scene 1](https://github.com/rubainwabo/rt/blob/master/demos/s.bmp)
+![scene 2](https://github.com/rubainwabo/rt/blob/master/demos/s1.png)
+![scene 3](https://github.com/rubainwabo/rt/blob/master/demos/s2.png)
+![scene 4](https://github.com/rubainwabo/rt/blob/master/demos/s3.png)
+![scene 5](https://github.com/rubainwabo/rt/blob/master/demos/s4.png)
