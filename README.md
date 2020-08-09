@@ -5,11 +5,12 @@
   - Cylinder
   - Cone
   - Plane
-## Reflexion
-## Refraction
-## Textures
-## Many options
-## Dependancies
+### Reflexion
+### Refraction
+### Textures
+### Other options
+### Dependancies
 - Mac OS 
 - Linux X11
 ### Images
+![scene 1](https://github.com/rubainwabo/rt/blob/master/demos/s.bmp)
