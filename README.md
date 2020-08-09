@@ -9,3 +9,7 @@
 ## Refraction
 ## Textures
 ## Many options
+## Dependancies
+- Mac OS 
+- Linux X11
+### Images
