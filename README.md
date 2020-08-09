@@ -1,5 +1,5 @@
 # Raytracer
-[Subject](https://github.com/rubainwabo/rt/blob/master/rt.pdf)
+[Subject (fr)](https://github.com/rubainwabo/rt/blob/master/rt.pdf) [Subject (en)](https://github.com/rubainwabo/rt/blob/master/rt.en.pdf)
 ## Shapes : 
   - Sphere
   - Cylinder
